@@ -28,6 +28,7 @@ test('a visitor can submit the discovery request form', function (): void {
 
     $component->assertSet('submitted', true);
     $component->assertSee('Got it.');
+    $component->assertSee('role="status"', false);
 
     $this->assertDatabaseHas('leads', ['email' => 'jim@carterplumbing.test']);
     Bus::assertDispatched(
@@ -87,6 +88,7 @@ test('it rate limits repeated submissions and shows a message instead of a 500',
     $secondsRemaining = $component->get('rateLimitedForSeconds');
     expect($secondsRemaining)->toBeGreaterThan(0)->toBeLessThanOrEqual(60);
     $component->assertSee("about {$secondsRemaining} seconds");
+    $component->assertSee('role="alert"', false);
 
     $this->assertDatabaseCount('leads', 5);
 });

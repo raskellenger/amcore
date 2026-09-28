@@ -54,7 +54,7 @@ $submit = function () {
     </p>
 
     @if ($submitted)
-        <div wire:key="success" class="mt-10 rounded border border-navy/10 bg-white p-6 text-center">
+        <div wire:key="success" role="status" class="mt-10 rounded border border-navy/10 bg-white p-6 text-center">
             <p class="font-heading text-lg font-semibold text-navy">Got it.</p>
             <p class="mt-2 text-ink/70">We'll reach out within <span class="text-ink/70">[PLACEHOLDER: response time]</span> to schedule your discovery call.</p>
         </div>
@@ -134,7 +134,7 @@ $submit = function () {
             </div>
 
             @if ($rateLimited)
-                <p class="rounded border border-brick/30 bg-brick/5 px-3 py-2 text-sm text-brick">
+                <p role="alert" class="rounded border border-brick/30 bg-brick/5 px-3 py-2 text-sm text-brick">
                     Too many discovery call requests from this connection. Try again in about {{ $rateLimitedForSeconds }} seconds, or call us directly.
                 </p>
             @endif
