@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Mail;
 
 use App\Models\Lead;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DiscoveryRequestReceived extends Mailable implements ShouldQueue
+class DiscoveryRequestReceived extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     public function __construct(
         public readonly Lead $lead,

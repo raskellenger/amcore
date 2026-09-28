@@ -23,5 +23,5 @@ test('it emails the discovery request notification for a lead', function (): voi
 
     SendDiscoveryRequestNotification::run($lead);
 
-    Mail::assertQueued(DiscoveryRequestReceived::class, fn ($mail): bool => $mail->lead->is($lead));
+    Mail::assertSent(DiscoveryRequestReceived::class, fn ($mail): bool => $mail->lead->is($lead));
 });
