@@ -42,6 +42,24 @@ test('every page has a favicon, apple touch icon, and og:image', function (): vo
     $response->assertSee('images/brand/og-image.png', false);
 });
 
+test('no analytics script renders until a provider is configured', function (): void {
+    config(['services.analytics.script_url' => null]);
+
+    $this->get('/')->assertDontSee('data-domain', false);
+});
+
+test('the analytics script renders once a provider is configured', function (): void {
+    config([
+        'services.analytics.script_url' => 'https://analytics.example/script.js',
+        'services.analytics.domain' => 'amcoresystems.com',
+    ]);
+
+    $response = $this->get('/');
+
+    $response->assertSee('data-domain="amcoresystems.com"', false);
+    $response->assertSee('src="https://analytics.example/script.js"', false);
+});
+
 test('every page carries LocalBusiness structured data for Greenville SC', function (): void {
     $response = $this->get('/');
 

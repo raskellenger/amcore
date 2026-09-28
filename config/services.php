@@ -37,4 +37,21 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Privacy-Friendly Analytics
+    |--------------------------------------------------------------------------
+    |
+    | [PLACEHOLDER] Provider not yet chosen. Deliberately generic — this shape
+    | (a <script defer data-domain="..." src="..."> tag) fits Plausible, Fathom,
+    | and most privacy-friendly analytics tools without any code change once a
+    | provider is picked. Unset (the default) means no script renders at all.
+    |
+    */
+
+    'analytics' => [
+        'script_url' => env('ANALYTICS_SCRIPT_URL'),
+        'domain' => env('ANALYTICS_DOMAIN'),
+    ],
+
 ];

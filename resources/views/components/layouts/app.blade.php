@@ -39,6 +39,10 @@
         ], JSON_UNESCAPED_SLASHES) !!}
     </script>
 
+    @if (config('services.analytics.script_url'))
+        <script defer data-domain="{{ config('services.analytics.domain') }}" src="{{ config('services.analytics.script_url') }}"></script>
+    @endif
+
     @fluxAppearance
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
