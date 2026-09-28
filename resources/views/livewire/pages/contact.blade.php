@@ -60,6 +60,8 @@ $submit = function () {
         </div>
     @else
         <form wire:submit="submit" class="mt-10 space-y-5" wire:key="form">
+            <p class="text-sm text-ink/70"><span class="text-brick" aria-hidden="true">*</span> Required</p>
+
             {{-- Honeypot — zero-size clipped box, never visible, never announced, can't cause horizontal overflow --}}
             <div class="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
                 <label for="website">Website</label>
@@ -67,8 +69,8 @@ $submit = function () {
             </div>
 
             <div>
-                <label for="name" class="block text-sm font-semibold text-navy">Name</label>
-                <input type="text" id="name" wire:model="name"
+                <label for="name" class="block text-sm font-semibold text-navy">Name <span class="text-brick" aria-hidden="true">*</span></label>
+                <input type="text" id="name" wire:model="name" required
                     @error('name') aria-invalid="true" aria-describedby="name-error" @enderror
                     class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                 @error('name') <p id="name-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
@@ -84,8 +86,8 @@ $submit = function () {
 
             <div class="grid gap-5 sm:grid-cols-2">
                 <div>
-                    <label for="trade" class="block text-sm font-semibold text-navy">Trade</label>
-                    <select id="trade" wire:model="trade"
+                    <label for="trade" class="block text-sm font-semibold text-navy">Trade <span class="text-brick" aria-hidden="true">*</span></label>
+                    <select id="trade" wire:model="trade" required
                         @error('trade') aria-invalid="true" aria-describedby="trade-error" @enderror
                         class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                         <option value="">Select one</option>
@@ -97,8 +99,8 @@ $submit = function () {
                 </div>
 
                 <div>
-                    <label for="crew_size" class="block text-sm font-semibold text-navy">Crew size</label>
-                    <select id="crew_size" wire:model="crew_size"
+                    <label for="crew_size" class="block text-sm font-semibold text-navy">Crew size <span class="text-brick" aria-hidden="true">*</span></label>
+                    <select id="crew_size" wire:model="crew_size" required
                         @error('crew_size') aria-invalid="true" aria-describedby="crew_size-error" @enderror
                         class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                         <option value="">Select one</option>
@@ -112,16 +114,16 @@ $submit = function () {
 
             <div class="grid gap-5 sm:grid-cols-2">
                 <div>
-                    <label for="phone" class="block text-sm font-semibold text-navy">Phone</label>
-                    <input type="tel" id="phone" wire:model="phone"
+                    <label for="phone" class="block text-sm font-semibold text-navy">Phone <span class="text-brick" aria-hidden="true">*</span></label>
+                    <input type="tel" id="phone" wire:model="phone" required
                         @error('phone') aria-invalid="true" aria-describedby="phone-error" @enderror
                         class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                     @error('phone') <p id="phone-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label for="email" class="block text-sm font-semibold text-navy">Email</label>
-                    <input type="email" id="email" wire:model="email"
+                    <label for="email" class="block text-sm font-semibold text-navy">Email <span class="text-brick" aria-hidden="true">*</span></label>
+                    <input type="email" id="email" wire:model="email" required
                         @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
                         class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                     @error('email') <p id="email-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
@@ -129,16 +131,16 @@ $submit = function () {
             </div>
 
             <div>
-                <label for="headache" class="block text-sm font-semibold text-navy">What's your biggest headache right now?</label>
-                <textarea id="headache" wire:model="headache" rows="4"
+                <label for="headache" class="block text-sm font-semibold text-navy">What's your biggest headache right now? <span class="text-brick" aria-hidden="true">*</span></label>
+                <textarea id="headache" wire:model="headache" rows="4" required
                     @error('headache') aria-invalid="true" aria-describedby="headache-error" @enderror
                     class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick"></textarea>
                 @error('headache') <p id="headache-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label for="preferred_contact_method" class="block text-sm font-semibold text-navy">Preferred contact method</label>
-                <select id="preferred_contact_method" wire:model="preferred_contact_method"
+                <label for="preferred_contact_method" class="block text-sm font-semibold text-navy">Preferred contact method <span class="text-brick" aria-hidden="true">*</span></label>
+                <select id="preferred_contact_method" wire:model="preferred_contact_method" required
                     @error('preferred_contact_method') aria-invalid="true" aria-describedby="preferred_contact_method-error" @enderror
                     class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                     <option value="">Select one</option>

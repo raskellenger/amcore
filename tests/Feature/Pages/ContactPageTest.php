@@ -46,6 +46,16 @@ test('it shows validation errors for missing required fields', function (): void
     $this->assertDatabaseCount('leads', 0);
 });
 
+test('required fields carry the native required attribute, company does not', function (): void {
+    $html = $this->get('/contact')->getContent();
+
+    preg_match('/<input[^>]*id="name"[^>]*>/', $html, $nameField);
+    preg_match('/<input[^>]*id="company"[^>]*>/', $html, $companyField);
+
+    expect($nameField[0])->toContain('required');
+    expect($companyField[0])->not->toContain('required');
+});
+
 test('an invalid field is linked to its error message for assistive tech', function (): void {
     $component = Volt::test('pages.contact')
         ->set('name', '')
