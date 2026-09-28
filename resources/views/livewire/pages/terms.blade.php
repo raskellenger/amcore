@@ -35,7 +35,7 @@ view()->share('description', 'AmCore Systems terms of use (draft).');
         </div>
         <div>
             <h2 class="font-heading text-lg font-semibold text-navy">Limitation of liability</h2>
-            <p class="mt-2"><span class="rounded border border-dashed border-navy/30 px-2 py-1 text-sm text-ink/50">PLACEHOLDER — final liability language pending attorney review.</span></p>
+            <p class="mt-2"><span class="rounded border border-dashed border-navy/30 px-2 py-1 text-sm text-ink/70">PLACEHOLDER — final liability language pending attorney review.</span></p>
         </div>
         <div>
             <h2 class="font-heading text-lg font-semibold text-navy">Governing law</h2>

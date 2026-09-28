@@ -54,7 +54,7 @@ $submit = function () {
     @if ($submitted)
         <div wire:key="success" class="mt-10 rounded border border-navy/10 bg-white p-6 text-center">
             <p class="font-heading text-lg font-semibold text-navy">Got it.</p>
-            <p class="mt-2 text-ink/70">We'll reach out within <span class="text-ink/50">[PLACEHOLDER: response time]</span> to schedule your discovery call.</p>
+            <p class="mt-2 text-ink/70">We'll reach out within <span class="text-ink/70">[PLACEHOLDER: response time]</span> to schedule your discovery call.</p>
         </div>
     @else
         <form wire:submit="submit" class="mt-10 space-y-5" wire:key="form">
@@ -146,7 +146,7 @@ $submit = function () {
     @endif
 
     <div class="mt-14 border-t border-navy/10 pt-8 text-sm text-ink/70">
-        <p>Call: <span class="text-ink/50">[PLACEHOLDER]</span> &middot; Email: <span class="text-ink/50">[PLACEHOLDER]</span></p>
+        <p>Call: <span class="text-ink/70">[PLACEHOLDER]</span> &middot; Email: <span class="text-ink/70">[PLACEHOLDER]</span></p>
         <p class="mt-1">Serving Greenville and the Upstate.</p>
     </div>
 </div>

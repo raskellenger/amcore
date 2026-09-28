@@ -95,7 +95,7 @@ $timeline = [
         <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($modules as $module)
                 <div class="rounded border border-navy/10 bg-white p-5">
-                    <flux:icon :name="$module['icon']" class="size-6 text-brick" />
+                    <flux:icon :name="$module['icon']" class="size-6 text-brick" aria-hidden="true" />
                     <h3 class="mt-3 font-heading font-semibold text-navy">{{ $module['name'] }}</h3>
                     <p class="mt-1 text-sm text-ink/70">{{ $module['line'] }}</p>
                 </div>

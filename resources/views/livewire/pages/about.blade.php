@@ -26,12 +26,12 @@ view()->share('description', 'AmCore Systems is a Greenville, SC company buildin
     </p>
 
     <h2 class="mt-14 font-heading text-xl font-semibold text-navy">What we value</h2>
-    <p class="mt-3 text-ink/50">
+    <p class="mt-3 text-ink/70">
         <span class="rounded border border-dashed border-navy/30 px-2 py-1 text-sm">PLACEHOLDER — values statement not yet provided.</span>
     </p>
 
     <h2 class="mt-14 font-heading text-xl font-semibold text-navy">Founders</h2>
-    <p class="mt-3 text-ink/50">
+    <p class="mt-3 text-ink/70">
         <span class="rounded border border-dashed border-navy/30 px-2 py-1 text-sm">PLACEHOLDER — bios and photos not yet provided.</span>
     </p>
 </div>

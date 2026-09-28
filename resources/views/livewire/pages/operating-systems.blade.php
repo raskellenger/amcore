@@ -31,10 +31,10 @@ $modules = [
     <div class="mt-12 grid gap-6 sm:grid-cols-2">
         @foreach ($modules as $module)
             <div class="rounded border border-navy/10 bg-white p-6">
-                <flux:icon :name="$module['icon']" class="size-6 text-brick" />
+                <flux:icon :name="$module['icon']" class="size-6 text-brick" aria-hidden="true" />
                 <h2 class="mt-3 font-heading text-lg font-semibold text-navy">{{ $module['name'] }}</h2>
                 <p class="mt-2 text-ink/80">{{ $module['what'] }}</p>
-                <p class="mt-2 text-sm text-ink/60">{{ $module['why'] }}</p>
+                <p class="mt-2 text-sm text-ink/70">{{ $module['why'] }}</p>
             </div>
         @endforeach
     </div>

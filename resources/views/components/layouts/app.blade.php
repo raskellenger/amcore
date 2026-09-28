@@ -83,7 +83,7 @@
             </div>
 
             <div>
-                <h2 class="font-heading text-sm font-semibold uppercase tracking-wide text-bronze">Company</h2>
+                <h2 class="font-heading text-sm font-semibold uppercase tracking-wide text-offwhite/70">Company</h2>
                 <ul class="mt-4 space-y-2 text-sm text-offwhite/80">
                     <li><a href="{{ route('operating-systems') }}" class="hover:text-white" wire:navigate>Operating Systems</a></li>
                     <li><a href="{{ route('websites') }}" class="hover:text-white" wire:navigate>Websites</a></li>
@@ -94,7 +94,7 @@
             </div>
 
             <div>
-                <h2 class="font-heading text-sm font-semibold uppercase tracking-wide text-bronze">Legal</h2>
+                <h2 class="font-heading text-sm font-semibold uppercase tracking-wide text-offwhite/70">Legal</h2>
                 <ul class="mt-4 space-y-2 text-sm text-offwhite/80">
                     <li><a href="{{ route('privacy') }}" class="hover:text-white" wire:navigate>Privacy Policy</a></li>
                     <li><a href="{{ route('terms') }}" class="hover:text-white" wire:navigate>Terms of Use</a></li>

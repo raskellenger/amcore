@@ -31,7 +31,7 @@ view()->share('description', 'AmCore Systems privacy policy (draft) — what we 
         </div>
         <div>
             <h2 class="font-heading text-lg font-semibold text-navy">Cookies and analytics</h2>
-            <p class="mt-2"><span class="rounded border border-dashed border-navy/30 px-2 py-1 text-sm text-ink/50">PLACEHOLDER — analytics provider not yet chosen.</span></p>
+            <p class="mt-2"><span class="rounded border border-dashed border-navy/30 px-2 py-1 text-sm text-ink/70">PLACEHOLDER — analytics provider not yet chosen.</span></p>
         </div>
         <div>
             <h2 class="font-heading text-lg font-semibold text-navy">Questions</h2>

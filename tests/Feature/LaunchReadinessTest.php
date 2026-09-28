@@ -16,6 +16,23 @@ test('robots.txt disallows case studies and points to the sitemap', function ():
     $response->assertSee('Sitemap: '.url('/sitemap.xml'), false);
 });
 
+test('every response carries baseline security headers', function (): void {
+    $response = $this->get('/');
+
+    $response->assertOk();
+    $response->assertHeader('X-Content-Type-Options', 'nosniff');
+    $response->assertHeader('X-Frame-Options', 'DENY');
+    $response->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+});
+
+test('no route ever lists, shows, or exposes a lead', function (): void {
+    $routeNames = collect(app('router')->getRoutes())
+        ->map(fn ($route) => $route->getName())
+        ->filter();
+
+    expect($routeNames->filter(fn (string $name): bool => str_contains($name, 'lead')))->toBeEmpty();
+});
+
 test('every page has a favicon, apple touch icon, and og:image', function (): void {
     $response = $this->get('/');
 

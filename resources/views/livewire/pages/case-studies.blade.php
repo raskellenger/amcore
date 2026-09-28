@@ -9,5 +9,5 @@ title('Case Studies — AmCore Systems');
 
 <div class="mx-auto max-w-3xl px-6 py-24 text-center">
     <h1 class="font-heading text-3xl font-semibold text-navy">Case Studies</h1>
-    <p class="mt-4 text-ink/60">Copy pending approval — this page is a structural placeholder. Not linked from navigation or indexed until a client approves sharing their story.</p>
+    <p class="mt-4 text-ink/70">Copy pending approval — this page is a structural placeholder. Not linked from navigation or indexed until a client approves sharing their story.</p>
 </div>
