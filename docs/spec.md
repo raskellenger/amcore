@@ -63,6 +63,10 @@ Rate limiting is enforced **inside** `SubmitDiscoveryRequest::handle()` (5 attem
 
 All body-text color choices are contrast-checked against our actual brand colors (computed with the real WCAG relative-luminance formula, not eyeballed): `text-ink/50` and `text-ink/60` both fail the 4.5:1 AA minimum on our off-white background and must never be used — `tests/Feature/AccessibilityTest.php` enforces this as a regression test, along with banning `text-bronze` as a text color entirely (brand rule: bronze is rules/details only).
 
+The mobile nav (below `lg`) is a real Alpine-driven hamburger menu, not a missing feature — the header previously had `hidden ... lg:flex` with no fallback at all. The honeypot field is a zero-size clipped box (`h-0 w-0 overflow-hidden`), not the more common `-left-[9999px]` offset technique, which risks horizontal page overflow with no clipping ancestor.
+
+The contact form: every field's error message is linked to its input via `aria-describedby` + `aria-invalid="true"` (WCAG 1.3.1/3.3.1); the success and rate-limit banners carry `role="status"`/`role="alert"` so screen readers are notified without a focus change (WCAG 4.1.3); the 7 genuinely-required fields (everything but `company`) carry a native `required` attribute plus a visible `aria-hidden` asterisk.
+
 ## Tests
 
 - `tests/Feature/Actions/SubmitDiscoveryRequestTest.php` — persistence, validation (missing fields, bad email, invalid trade), honeypot silent-drop, queued dispatch.
