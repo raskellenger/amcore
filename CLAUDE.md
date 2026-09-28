@@ -1,47 +1,57 @@
-<laravel-boost-guidelines>
-# Laravel Application
+# AmCore Systems LLC — Marketing Website
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+Laravel Boost's framework/package guidelines live in `AGENTS.md` (auto-generated, refresh with `php artisan boost:install` after major dependency changes). This file holds the project-specific rules Boost doesn't know about.
 
-## Prerequisites
+## What this app is
 
-Verify that PHP and Composer are available:
+A marketing website for AmCore Systems LLC, a Greenville, SC company that builds business operating systems for local trades businesses (plumbing, HVAC, electrical, painting/drywall, roofing). Goal: book discovery calls. **Independent app — no hub, no login, no accounts, no multi-tenancy, no billing.** Not a satellite of anything.
 
-```sh
-php -v
-composer -V
-```
+## Engineering rules (RhynoDesigns standard, applied to this independent app)
 
-If either command is unavailable, detect the user's operating system and install the prerequisites with the appropriate command:
+- Strict TDD with Pest, functional style (`test()`/`it()`) — never class-based PHPUnit.
+- Quality loop every task, in this order: failing test → implement → `composer rector-dry` → `composer rector` → `./vendor/bin/pint` → `PAO_DISABLE=1 ./vendor/bin/phpstan analyse` → verify in browser at `amcore.test` → commit → update plan/docs. Rector before Pint — order is load-bearing.
+- Logic lives in `app/Actions/{Domain}/`, named VerbNoun (e.g. `SubmitDiscoveryRequest`). Sync `::run()`; queued work is `ShouldQueue` + `::dispatch()`. **No `app/Jobs/`, no service classes** unless a genuine multi-method external connector shows up.
+- `declare(strict_types=1);` in every new file under Actions/Models/Http — never in Volt blades.
+- Inject `LoggerInterface`; never use the `Log` facade.
+- No numeric/public-facing IDs for anything a stranger could guess. The `Lead` model uses `HasUlids`. No route ever exposes a lead publicly (there isn't supposed to be one — leads are write-only from the contact form).
+- Livewire + Volt (single-file components) + Flux UI (free tier — no license/`flux:activate`) + Tailwind v4. No SPA.
+- Conventional commits. Branch `feat/[name]` for non-trivial work, merge to local `main`. **Never push unless explicitly asked** — this workspace's convention is push = production deploy on Laravel Cloud.
+- Docs (`docs/*.md`) follow ASD-STE100 + Zinsser: short sentences, no unexplained jargon. Marketing copy on the site itself is exempt from this — it uses the trades voice described below.
 
-macOS:
+## Mail, queues, error tracking
 
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
-```
+- Contact-form notification email is sent via a **queued Laravel Action**, using Amazon SES from **AmCore's own verified SES identity** — not a hub relay (this app has no hub). Production queue connection is Laravel Cloud's managed queue.
+- **Never ship `MAIL_MAILER=log` to production.** Verify the real mailer before the first production deploy.
+- Sentry is required before first production deploy. `config/sentry.php` is published; `SENTRY_LARAVEL_DSN` is a placeholder until a real Sentry project exists for AmCore.
+- Save every contact-form submission to the database *before* attempting to send mail, so a mail failure never loses a lead.
 
-Windows PowerShell:
+## Security
 
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
-```
+- CSRF on all forms (Laravel default). Server-side validation on every field.
+- Honeypot field + rate limiting on the contact form.
+- Never collect or store SSNs, license numbers, or payment information.
 
-Linux:
+## Content rules — never invent facts
 
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
-```
+Do not create testimonials, client logos, statistics, awards, certifications, team members, or case studies. Anything not supplied by the user is a visible `[PLACEHOLDER: description]`, consolidated in `docs/reference.md` (or wherever the current placeholder list lives).
 
-After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
+### Voice
+Plain, direct, confident, short sentences. Trade vocabulary (jobs, crews, work orders, T&M, callbacks, the shop, the truck). Banned words: SaaS, digital transformation, synergy, leverage, revolutionize, cutting-edge, seamless, game-changer, AI-powered.
 
-## Agent Setup
+### Claims rules (mandatory — see full list in the intake, summarized here)
+May say: SOC 2 Type II attestation *of the hosting infrastructure* (never of AmCore itself), encrypted at rest/in transit/backups, WAF, daily off-site backups, crews only see assigned work, Face ID/fingerprint sign-in, an uptime commitment with bill credits, offline-and-syncs-later, "you own your data, export any time, we never sell or share it", no per-user fees.
+Never say: "AmCore is SOC 2 compliant/certified", any compliance certification (HIPAA/ISO 27001/etc.), "bank-level"/"military-grade"/"unhackable", "99.99%" or "never goes down", that AmCore covers lost business, any specific uptime/response number that isn't an approved placeholder, vendor names as promises.
 
-Install Laravel Boost from the application root before making application changes:
+### Pricing
+Never publish prices. Use: "One setup fee. One monthly fee. No per-user fees." Every pricing mention links to "Book a discovery call."
 
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
+### Brand
+Colors as Tailwind v4 theme tokens: navy `#1F2A44` (primary), brick red `#9B2C2C` (accent), bronze `#A07C3B` (rules/details only, never body text), warm off-white background, near-black text. Headings: Fraunces (serif). Body: IBM Plex Sans, minimum 16px. No gradients, emoji, or glassmorphism. Real trades imagery only (labeled placeholders until real photos exist) — no stock photos of people in suits at laptops.
 
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
+## Where things are
+
+- Spec/overview/reference docs: `docs/spec.md`, `docs/overview.md`, `docs/reference.md`.
+- Project plan: `~/.claude/plans/` (this workspace tracks plans as a single markdown file per plan — there is no `plans.db` on this machine yet, despite the RhynoDesigns playbook describing one).
+- GitHub repo: pending — user confirmed private, under AmCore's own GitHub org, but the org/repo name is still a placeholder.
+- Domain: pending purchase at Namesilo — placeholder.
+- Laravel Cloud: deploy only when the user explicitly asks. Use AmCore's own Cloud account, hibernation OFF (public marketing site).

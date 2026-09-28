@@ -1,23 +1,34 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "amcore/amcore",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Marketing website for AmCore Systems LLC.",
+    "keywords": ["laravel", "amcore"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "aws/aws-sdk-php": "^3.398",
         "laravel/framework": "^13.17",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "livewire/flux": "^2.20",
+        "livewire/livewire": "^4.4",
+        "livewire/volt": "^1.11",
+        "sentry/sentry-laravel": "^4.28"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^2.6",
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.12",
+        "laravel/boost": "^2.10",
         "laravel/pail": "^1.2.5",
         "laravel/pao": "^1.0.6",
-        "laravel/pint": "^1.27",
+        "laravel/pint": "^1.32",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^12.5.12"
+        "pestphp/pest": "^4.7",
+        "pestphp/pest-plugin-laravel": "^4.1",
+        "phpunit/phpunit": "^12.5.12",
+        "rector/rector": "^2.6"
     },
     "autoload": {
         "psr-4": {
@@ -43,6 +54,18 @@
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan dev"
+        ],
+        "rector-dry": [
+            "./vendor/bin/rector process --dry-run"
+        ],
+        "rector": [
+            "./vendor/bin/rector process"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
+        ],
+        "stan": [
+            "PAO_DISABLE=1 ./vendor/bin/phpstan analyse --memory-limit=1G"
         ],
         "test": [
             "@php artisan config:clear --ansi @no_additional_args",
