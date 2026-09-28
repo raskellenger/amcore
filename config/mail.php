@@ -6,6 +6,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Discovery Request Recipient
+    |--------------------------------------------------------------------------
+    |
+    | Where contact-form notification emails are sent. [PLACEHOLDER] until
+    | AmCore confirms the real inbox that should receive discovery requests.
+    |
+    */
+
+    'discovery_request_recipient' => env('MAIL_DISCOVERY_REQUEST_RECIPIENT', 'discovery-requests@amcoresystems.com'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Default Mailer
     |--------------------------------------------------------------------------
     |
