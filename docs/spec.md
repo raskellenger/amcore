@@ -76,6 +76,12 @@ All body-text color choices are contrast-checked against our actual brand colors
 
 Quality gate (must be clean before every commit): `composer rector-dry` → `composer rector` → `composer pint` → `composer stan` (Larastan, `--memory-limit=1G`) → `./vendor/bin/pest` → verify in browser.
 
+## ⚠️ Pre-deploy trap: `TrustProxies`
+
+No `TrustProxies` configuration exists (Laravel's default: trust no proxies). That's correct and safe for local dev. **It will silently break rate limiting in production**: `SubmitDiscoveryRequest` keys its rate limit on `request()->ip()`, and behind Laravel Cloud's load balancer, every visitor's request arrives at the app via the LB — without an explicit trusted-proxy configuration, `request()->ip()` returns the *load balancer's* IP for every single visitor, not the real client's. Concretely: the 6th legitimate visitor in a minute (from any IP) gets falsely rate-limited, because the app thinks all 6 came from the same address.
+
+Before the first production deploy: configure `Illuminate\Http\Middleware\TrustProxies` (via `bootstrap/app.php`'s `withMiddleware(...)->trustProxies(...)`) to trust Laravel Cloud's actual proxy setup — check Cloud's own deploy docs for the specific configuration they document (this is a per-platform detail, deliberately not guessed at here). Add an end-to-end test post-deploy: two rapid-fire submissions from genuinely different source IPs should never both get rate-limited together.
+
 ## Known gaps / not yet built
 
 - Case Studies real content — intentionally deferred until a client approves sharing their story.
