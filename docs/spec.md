@@ -57,6 +57,12 @@ ULID primary key. Columns: `name`, `company` (nullable), `trade`, `crew_size`, `
 
 Rate limiting is enforced **inside** `SubmitDiscoveryRequest::handle()` (5 attempts/minute per IP, via `RateLimiter::tooManyAttempts()`/`hit()`), not via route/`throttle:` middleware — Livewire component actions all funnel through the single `/livewire/update` endpoint regardless of which page they originate from, so route-level throttling on `/contact` would not actually cover form submissions. Throws `App\Exceptions\TooManyDiscoveryRequestsException` when exceeded. CSRF is Laravel's default; the honeypot check is covered above.
 
+## Security headers & accessibility
+
+`App\Http\Middleware\AddSecurityHeaders` (appended to the `web` group in `bootstrap/app.php`) sets `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`. A CSP is not yet set (needs the real domain/asset hosts confirmed first — premature to lock down before launch).
+
+All body-text color choices are contrast-checked against our actual brand colors (computed with the real WCAG relative-luminance formula, not eyeballed): `text-ink/50` and `text-ink/60` both fail the 4.5:1 AA minimum on our off-white background and must never be used — `tests/Feature/AccessibilityTest.php` enforces this as a regression test, along with banning `text-bronze` as a text color entirely (brand rule: bronze is rules/details only).
+
 ## Tests
 
 - `tests/Feature/Actions/SubmitDiscoveryRequestTest.php` — persistence, validation (missing fields, bad email, invalid trade), honeypot silent-drop, queued dispatch.
@@ -64,7 +70,8 @@ Rate limiting is enforced **inside** `SubmitDiscoveryRequest::handle()` (5 attem
 - `tests/Feature/MarketingPagesTest.php` — every route returns 200 and contains its expected title fragment.
 - `tests/Feature/Pages/HomePageTest.php` — home page's hero, pain points, pillars, modules, and timeline all render.
 - `tests/Feature/Pages/ContactPageTest.php` — full Volt component coverage via `Volt::test()`: successful submission, validation errors, honeypot silent-success, rate-limit message.
-- `tests/Feature/LaunchReadinessTest.php` — 404 page, robots.txt, sitemap.xml, favicon/OG tags, structured data.
+- `tests/Feature/LaunchReadinessTest.php` — 404 page, robots.txt, sitemap.xml, favicon/OG tags, structured data, security headers, no lead-exposing route exists.
+- `tests/Feature/AccessibilityTest.php` — no page uses a sub-AA-contrast text class or bronze-as-text.
 - `RefreshDatabase` is enabled workspace-wide via `tests/Pest.php`.
 
 Quality gate (must be clean before every commit): `composer rector-dry` → `composer rector` → `composer pint` → `composer stan` (Larastan, `--memory-limit=1G`) → `./vendor/bin/pest` → verify in browser.
