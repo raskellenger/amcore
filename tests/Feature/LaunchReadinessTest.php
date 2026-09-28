@@ -16,6 +16,15 @@ test('robots.txt disallows case studies and points to the sitemap', function ():
     $response->assertSee('Sitemap: '.url('/sitemap.xml'), false);
 });
 
+test('the mobile menu exists with every nav link and a toggle button', function (): void {
+    $response = $this->get('/');
+
+    $response->assertOk();
+    $response->assertSee('id="mobile-menu"', false);
+    $response->assertSee('aria-label="Toggle menu"', false);
+    $response->assertSee('mobileMenuOpen', false);
+});
+
 test('every response carries baseline security headers', function (): void {
     $response = $this->get('/');
 

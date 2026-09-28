@@ -52,7 +52,7 @@
         Skip to content
     </a>
 
-    <header class="border-b border-navy/10 bg-offwhite/95 backdrop-blur">
+    <header x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false" class="relative border-b border-navy/10 bg-offwhite/95 backdrop-blur">
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
             <a href="{{ route('home') }}" class="flex items-center gap-2" wire:navigate>
                 <img src="{{ asset('images/brand/amcore-logo-nav.png') }}" alt="AmCore Systems" class="h-9 w-auto">
@@ -66,11 +66,32 @@
                 <a href="{{ route('faq') }}" class="hover:text-brick" wire:navigate>FAQ</a>
             </nav>
 
-            <a href="{{ route('contact') }}" wire:navigate
-                class="inline-flex shrink-0 items-center rounded bg-brick px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick/90">
+            <div class="flex items-center gap-3">
+                <a href="{{ route('contact') }}" wire:navigate
+                    class="hidden shrink-0 items-center rounded bg-brick px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick/90 sm:inline-flex">
+                    Book a Discovery Call
+                </a>
+
+                <button type="button" @click="mobileMenuOpen = !mobileMenuOpen" aria-controls="mobile-menu"
+                    :aria-expanded="mobileMenuOpen" aria-label="Toggle menu" class="rounded p-2 text-navy hover:bg-navy/5 lg:hidden">
+                    <flux:icon name="bars-3" x-show="!mobileMenuOpen" class="size-6" aria-hidden="true" />
+                    <flux:icon name="x-mark" x-show="mobileMenuOpen" x-cloak class="size-6" aria-hidden="true" />
+                </button>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" x-show="mobileMenuOpen" x-cloak @click.outside="mobileMenuOpen = false"
+            class="absolute inset-x-0 top-full z-40 flex flex-col gap-1 border-b border-navy/10 bg-offwhite px-6 py-4 text-sm font-medium shadow-lg lg:hidden">
+            <a href="{{ route('operating-systems') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-navy/5 hover:text-brick" wire:navigate>Operating Systems</a>
+            <a href="{{ route('websites') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-navy/5 hover:text-brick" wire:navigate>Websites</a>
+            <a href="{{ route('how-we-work') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-navy/5 hover:text-brick" wire:navigate>How We Work</a>
+            <a href="{{ route('about') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-navy/5 hover:text-brick" wire:navigate>About</a>
+            <a href="{{ route('faq') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-navy/5 hover:text-brick" wire:navigate>FAQ</a>
+            <a href="{{ route('contact') }}" @click="mobileMenuOpen = false" wire:navigate
+                class="mt-2 inline-flex items-center justify-center rounded bg-brick px-4 py-2 font-semibold text-white sm:hidden">
                 Book a Discovery Call
             </a>
-        </div>
+        </nav>
     </header>
 
     <main id="main">
