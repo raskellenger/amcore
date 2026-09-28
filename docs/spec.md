@@ -25,10 +25,13 @@ All routes are `Volt::route()` full-page components, defined in `routes/web.php`
 | `/about` | `about` | `pages.about` |
 | `/faq` | `faq` | `pages.faq` |
 | `/contact` | `contact` | `pages.contact` |
+| `/case-studies` | `case-studies` | `pages.case-studies` |
 | `/privacy` | `privacy` | `pages.privacy` |
 | `/terms` | `terms` | `pages.terms` |
 
-All nine currently render structural placeholders (`resources/views/livewire/pages/*.blade.php`) pending copy approval. No auth, no admin routes, no lead-listing routes exist or are planned.
+All nine sitemap pages currently render structural placeholders (`resources/views/livewire/pages/*.blade.php`) pending copy approval. `case-studies` additionally carries a `noindex, nofollow` meta tag (layout checks `request()->routeIs('case-studies')`) and is excluded from `/sitemap.xml` and disallowed in `/robots.txt`. No auth, no admin routes, no lead-listing routes exist or are planned.
+
+`/robots.txt` and `/sitemap.xml` are plain closures in `routes/web.php` (not static `public/` files), so the host always matches `APP_URL` in every environment. `resources/views/errors/404.blade.php` is a branded 404 reusing the marketing layout.
 
 ## Layout
 
@@ -52,7 +55,7 @@ ULID primary key. Columns: `name`, `company` (nullable), `trade`, `crew_size`, `
 - `App\Actions\Leads\SendDiscoveryRequestNotification` — `ShouldQueue` Action. Sends `App\Mail\DiscoveryRequestReceived` to `config('mail.discovery_request_recipient')` (env `MAIL_DISCOVERY_REQUEST_RECIPIENT`, placeholder default).
 - `App\Mail\DiscoveryRequestReceived` — `ShouldQueue` Mailable, markdown view `resources/views/mail/discovery-request-received.blade.php`.
 
-Rate limiting on the contact form itself is not yet implemented — it lands with the real contact page/form (post copy-approval), alongside CSRF (Laravel default) and the honeypot already covered above.
+Rate limiting is enforced **inside** `SubmitDiscoveryRequest::handle()` (5 attempts/minute per IP, via `RateLimiter::tooManyAttempts()`/`hit()`), not via route/`throttle:` middleware — Livewire component actions all funnel through the single `/livewire/update` endpoint regardless of which page they originate from, so route-level throttling on `/contact` would not actually cover form submissions. Throws `App\Exceptions\TooManyDiscoveryRequestsException` when exceeded. CSRF is Laravel's default; the honeypot check is covered above.
 
 ## Tests
 
@@ -65,7 +68,7 @@ Quality gate (must be clean before every commit): `composer rector-dry` → `com
 
 ## Known gaps / not yet built
 
-- Contact page: real copy + working Volt form + rate limiting (blocked on copy approval).
+- Contact page: real copy + working Volt form wired to `SubmitDiscoveryRequest` (blocked on copy approval). Rate limiting and honeypot are already implemented at the Action level and fully tested.
 - Favicon / OG image: needs a precise crop of the real logo mark (`resources/brand-source/amcore-logo-navy-transparent.png`) — not yet produced.
-- Sitemap.xml, robots.txt, custom 404, LocalBusiness structured data — part of `herd-launch-readiness`, not started.
+- LocalBusiness structured data — part of `herd-launch-readiness`, not started. (Sitemap.xml, robots.txt, and a custom 404 are done.)
 - GitHub remote, domain, Sentry DSN, SES verified identity, Laravel Cloud — all placeholders, see `docs/reference.md`.
