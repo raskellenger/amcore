@@ -71,7 +71,6 @@ Quality gate (must be clean before every commit): `composer rector-dry` → `com
 
 ## Known gaps / not yet built
 
-- Unique per-page meta descriptions (every page currently shares the layout's default description).
 - Case Studies real content — intentionally deferred until a client approves sharing their story.
 - GitHub remote, domain, Sentry DSN, SES verified identity, Laravel Cloud — all placeholders, see `docs/reference.md`.
 - Real photography to replace the generator-prompt placeholders (hero, trades strip, etc.) — no images are embedded on any page yet, only copy.
