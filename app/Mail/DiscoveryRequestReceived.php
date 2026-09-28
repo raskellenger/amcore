@@ -20,6 +20,7 @@ class DiscoveryRequestReceived extends Mailable
     {
         return $this
             ->subject('New discovery call request: '.$this->lead->name)
+            ->replyTo($this->lead->email, $this->lead->name)
             ->view('mail.discovery-request-received');
     }
 }

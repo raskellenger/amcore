@@ -25,3 +25,19 @@ test('it emails the discovery request notification for a lead', function (): voi
 
     Mail::assertSent(DiscoveryRequestReceived::class, fn ($mail): bool => $mail->lead->is($lead));
 });
+
+test('the notification email replies straight to the lead, not to AmCore itself', function (): void {
+    $lead = Lead::create([
+        'name' => 'Jim Carter',
+        'company' => 'Carter Plumbing',
+        'trade' => 'plumbing',
+        'crew_size' => '5_14',
+        'phone' => '864-555-0142',
+        'email' => 'jim@carterplumbing.test',
+        'headache' => 'We lose paper work orders on job sites constantly.',
+        'preferred_contact_method' => 'phone',
+    ]);
+
+    $mailable = new DiscoveryRequestReceived($lead);
+    $mailable->assertHasReplyTo('jim@carterplumbing.test');
+});
