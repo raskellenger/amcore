@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Actions\Leads;
 
+use App\Exceptions\TooManyDiscoveryRequestsException;
 use App\Models\Lead;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Validator;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Psr\Log\LoggerInterface;
@@ -13,6 +15,8 @@ class SubmitDiscoveryRequest
 {
     use AsAction;
 
+    private const int MAX_ATTEMPTS_PER_MINUTE = 5;
+
     public function __construct(
         private readonly LoggerInterface $logger,
     ) {}
@@ -20,8 +24,17 @@ class SubmitDiscoveryRequest
     /**
      * @param  array<string, mixed>  $data
      */
-    public function handle(array $data): ?Lead
+    public function handle(array $data, ?string $ip = null): ?Lead
     {
+        $ip ??= request()->ip();
+        $rateLimitKey = 'discovery-request:'.$ip;
+
+        if (RateLimiter::tooManyAttempts($rateLimitKey, self::MAX_ATTEMPTS_PER_MINUTE)) {
+            throw new TooManyDiscoveryRequestsException(RateLimiter::availableIn($rateLimitKey));
+        }
+
+        RateLimiter::hit($rateLimitKey, 60);
+
         if (filled($data['website'] ?? null)) {
             $this->logger->info('Discovery request dropped by honeypot.');
 

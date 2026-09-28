@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Actions\Leads\SendDiscoveryRequestNotification;
 use App\Actions\Leads\SubmitDiscoveryRequest;
+use App\Exceptions\TooManyDiscoveryRequestsException;
 use App\Models\Lead;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Validation\ValidationException;
@@ -82,4 +83,28 @@ test('it silently drops submissions caught by the honeypot', function (): void {
         JobDecorator::class,
         fn (JobDecorator $job): bool => $job->getAction() instanceof SendDiscoveryRequestNotification
     );
+});
+
+test('it rate limits repeated submissions from the same ip', function (): void {
+    Bus::fake();
+
+    for ($i = 0; $i < 5; $i++) {
+        SubmitDiscoveryRequest::run(validDiscoveryRequestData(['email' => "jim{$i}@carterplumbing.test"]), '203.0.113.5');
+    }
+
+    $this->assertDatabaseCount('leads', 5);
+
+    SubmitDiscoveryRequest::run(validDiscoveryRequestData(['email' => 'jim6@carterplumbing.test']), '203.0.113.5');
+})->throws(TooManyDiscoveryRequestsException::class);
+
+test('it does not rate limit submissions from a different ip', function (): void {
+    Bus::fake();
+
+    for ($i = 0; $i < 5; $i++) {
+        SubmitDiscoveryRequest::run(validDiscoveryRequestData(['email' => "jim{$i}@carterplumbing.test"]), '203.0.113.5');
+    }
+
+    $lead = SubmitDiscoveryRequest::run(validDiscoveryRequestData(['email' => 'other@otherplumbing.test']), '198.51.100.9');
+
+    expect($lead)->toBeInstanceOf(Lead::class);
 });

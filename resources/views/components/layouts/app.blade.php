@@ -7,6 +7,10 @@
     <title>{{ $title ?? 'AmCore Systems' }}</title>
     <meta name="description" content="{{ $description ?? 'Operating systems for the trades. Built by tradesmen. Run for you.' }}">
 
+    @if (request()->routeIs('case-studies'))
+        <meta name="robots" content="noindex, nofollow">
+    @endif
+
     @fluxAppearance
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
