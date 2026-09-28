@@ -46,6 +46,16 @@ test('it shows validation errors for missing required fields', function (): void
     $this->assertDatabaseCount('leads', 0);
 });
 
+test('an invalid field is linked to its error message for assistive tech', function (): void {
+    $component = Volt::test('pages.contact')
+        ->set('name', '')
+        ->call('submit');
+
+    $component->assertSee('id="name-error"', false);
+    $component->assertSee('aria-describedby="name-error"', false);
+    $component->assertSee('aria-invalid="true"', false);
+});
+
 test('a honeypot submission shows success without creating a lead', function (): void {
     Bus::fake();
 

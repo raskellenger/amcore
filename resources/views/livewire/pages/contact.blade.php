@@ -68,69 +68,85 @@ $submit = function () {
 
             <div>
                 <label for="name" class="block text-sm font-semibold text-navy">Name</label>
-                <input type="text" id="name" wire:model="name" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
-                @error('name') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                <input type="text" id="name" wire:model="name"
+                    @error('name') aria-invalid="true" aria-describedby="name-error" @enderror
+                    class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                @error('name') <p id="name-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
             </div>
 
             <div>
                 <label for="company" class="block text-sm font-semibold text-navy">Company</label>
-                <input type="text" id="company" wire:model="company" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
-                @error('company') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                <input type="text" id="company" wire:model="company"
+                    @error('company') aria-invalid="true" aria-describedby="company-error" @enderror
+                    class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                @error('company') <p id="company-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
             </div>
 
             <div class="grid gap-5 sm:grid-cols-2">
                 <div>
                     <label for="trade" class="block text-sm font-semibold text-navy">Trade</label>
-                    <select id="trade" wire:model="trade" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                    <select id="trade" wire:model="trade"
+                        @error('trade') aria-invalid="true" aria-describedby="trade-error" @enderror
+                        class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                         <option value="">Select one</option>
                         @foreach (Lead::TRADES as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                     </select>
-                    @error('trade') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                    @error('trade') <p id="trade-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
                     <label for="crew_size" class="block text-sm font-semibold text-navy">Crew size</label>
-                    <select id="crew_size" wire:model="crew_size" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                    <select id="crew_size" wire:model="crew_size"
+                        @error('crew_size') aria-invalid="true" aria-describedby="crew_size-error" @enderror
+                        class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                         <option value="">Select one</option>
                         @foreach (Lead::CREW_SIZES as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                     </select>
-                    @error('crew_size') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                    @error('crew_size') <p id="crew_size-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
                 </div>
             </div>
 
             <div class="grid gap-5 sm:grid-cols-2">
                 <div>
                     <label for="phone" class="block text-sm font-semibold text-navy">Phone</label>
-                    <input type="tel" id="phone" wire:model="phone" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
-                    @error('phone') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                    <input type="tel" id="phone" wire:model="phone"
+                        @error('phone') aria-invalid="true" aria-describedby="phone-error" @enderror
+                        class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                    @error('phone') <p id="phone-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
                     <label for="email" class="block text-sm font-semibold text-navy">Email</label>
-                    <input type="email" id="email" wire:model="email" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
-                    @error('email') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                    <input type="email" id="email" wire:model="email"
+                        @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
+                        class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                    @error('email') <p id="email-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
                 </div>
             </div>
 
             <div>
                 <label for="headache" class="block text-sm font-semibold text-navy">What's your biggest headache right now?</label>
-                <textarea id="headache" wire:model="headache" rows="4" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick"></textarea>
-                @error('headache') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                <textarea id="headache" wire:model="headache" rows="4"
+                    @error('headache') aria-invalid="true" aria-describedby="headache-error" @enderror
+                    class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick"></textarea>
+                @error('headache') <p id="headache-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
             </div>
 
             <div>
                 <label for="preferred_contact_method" class="block text-sm font-semibold text-navy">Preferred contact method</label>
-                <select id="preferred_contact_method" wire:model="preferred_contact_method" class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
+                <select id="preferred_contact_method" wire:model="preferred_contact_method"
+                    @error('preferred_contact_method') aria-invalid="true" aria-describedby="preferred_contact_method-error" @enderror
+                    class="mt-1 w-full rounded border border-navy/20 px-3 py-2 focus:border-brick focus:outline-none focus:ring-1 focus:ring-brick">
                     <option value="">Select one</option>
                     @foreach (Lead::CONTACT_METHODS as $value => $label)
                         <option value="{{ $value }}">{{ $label }}</option>
                     @endforeach
                 </select>
-                @error('preferred_contact_method') <p class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
+                @error('preferred_contact_method') <p id="preferred_contact_method-error" class="mt-1 text-sm text-brick">{{ $message }}</p> @enderror
             </div>
 
             @if ($rateLimited)
