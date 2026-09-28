@@ -16,6 +16,14 @@ test('robots.txt disallows case studies and points to the sitemap', function ():
     $response->assertSee('Sitemap: '.url('/sitemap.xml'), false);
 });
 
+test('every page carries LocalBusiness structured data for Greenville SC', function (): void {
+    $response = $this->get('/');
+
+    $response->assertOk();
+    $response->assertSee('LocalBusiness', false);
+    $response->assertSee('Greenville', false);
+});
+
 test('sitemap.xml lists every indexable page', function (): void {
     $response = $this->get('/sitemap.xml');
 

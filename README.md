@@ -1,58 +1,58 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AmCore Systems — Marketing Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Marketing site for AmCore Systems LLC. See `docs/overview.md` for what this is, `docs/spec.md` for the technical spec, `docs/reference.md` for brand tokens and the placeholder list, and `CLAUDE.md` for the full standing engineering/content rules.
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Local setup
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+npm install
+cp .env.example .env   # already done for local dev — .env is gitignored
+php artisan key:generate
+php artisan migrate
+npm run build           # or `npm run dev` while actively editing styles
+herd secure amcore       # trusted local SSL, only needed once
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Visit `https://amcore.test`.
 
-## Contributing
+## Editing page copy
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Each sitemap page is a Volt single-file component under `resources/views/livewire/pages/*.blade.php`. Edit the Blade markup directly — the `title()`/`layout()` calls at the top of each file set the page `<title>` and wire it to the shared layout at `resources/views/components/layouts/app.blade.php`.
 
-## Code of Conduct
+After any Blade/CSS change:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+npm run build
+```
 
-## Security Vulnerabilities
+(or leave `npm run dev` running while you work — it hot-reloads).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Brand colors, fonts, and copy rules (banned words, claims rules, no invented facts) are documented in `CLAUDE.md` and `docs/reference.md` — read those before rewriting any page.
 
-## License
+## Running the quality gate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Every change should pass this before committing:
+
+```bash
+composer rector-dry   # preview Rector's suggested changes
+composer rector       # apply them
+composer pint         # code style
+composer stan         # Larastan static analysis
+./vendor/bin/pest     # full test suite
+```
+
+## The one interactive feature
+
+The contact form (`/contact`) saves a `Lead` and queues a notification email via `App\Actions\Leads\SubmitDiscoveryRequest`. It's honeypot-protected and rate-limited (5 submissions/minute per IP) at the Action level — see `docs/spec.md` for why that's implemented there instead of as route middleware.
+
+## Deploying
+
+**This app deploys only when explicitly asked to.** Laravel Cloud is not configured yet — deployment is a `[PLACEHOLDER]` step, tracked in the project plan (`~/.claude/plans/amcore-marketing-site.md`), gated on:
+
+- A real domain (Namesilo) and DNS cutover
+- A verified Amazon SES sending identity for AmCore's own domain (never `MAIL_MAILER=log` in production)
+- A real Sentry DSN
+- AmCore's own Laravel Cloud account, with hibernation **off** (this is a public marketing site, not a low-traffic internal tool)
+
+Once those are in place: commit to `main` locally as usual, then `git push` — on Laravel Cloud, **push is a production deploy**, so only push when you actually mean to ship.

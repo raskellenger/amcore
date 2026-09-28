@@ -70,5 +70,5 @@ Quality gate (must be clean before every commit): `composer rector-dry` → `com
 
 - Contact page: real copy + working Volt form wired to `SubmitDiscoveryRequest` (blocked on copy approval). Rate limiting and honeypot are already implemented at the Action level and fully tested.
 - Favicon / OG image: needs a precise crop of the real logo mark (`resources/brand-source/amcore-logo-navy-transparent.png`) — not yet produced.
-- LocalBusiness structured data — part of `herd-launch-readiness`, not started. (Sitemap.xml, robots.txt, and a custom 404 are done.)
+- Unique per-page meta descriptions — blocked on copy approval. (Sitemap.xml, robots.txt, custom 404, and LocalBusiness structured data are done — address is placeholder-only, city/state confirmed.)
 - GitHub remote, domain, Sentry DSN, SES verified identity, Laravel Cloud — all placeholders, see `docs/reference.md`.

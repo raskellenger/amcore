@@ -11,6 +11,23 @@
         <meta name="robots" content="noindex, nofollow">
     @endif
 
+    {{-- LocalBusiness structured data. Street address, postal code, and phone are placeholders pending real values — see docs/reference.md. --}}
+    <script type="application/ld+json">
+        {!! json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'LocalBusiness',
+            'name' => 'AmCore Systems LLC',
+            'url' => url('/'),
+            'areaServed' => 'Greenville, SC and the Upstate',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'addressLocality' => 'Greenville',
+                'addressRegion' => 'SC',
+                'addressCountry' => 'US',
+            ],
+        ], JSON_UNESCAPED_SLASHES) !!}
+    </script>
+
     @fluxAppearance
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
