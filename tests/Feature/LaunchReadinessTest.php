@@ -42,6 +42,12 @@ test('no route ever lists, shows, or exposes a lead', function (): void {
     expect($routeNames->filter(fn (string $name): bool => str_contains($name, 'lead')))->toBeEmpty();
 });
 
+test('favicon.ico is not the empty placeholder Laravel ships by default', function (): void {
+    // Static files under public/ are served by the web server, not routed through
+    // the app — so this checks the file on disk rather than making an HTTP request.
+    expect(filesize(public_path('favicon.ico')))->toBeGreaterThan(0);
+});
+
 test('every page has a favicon, apple touch icon, and og:image', function (): void {
     $response = $this->get('/');
 
