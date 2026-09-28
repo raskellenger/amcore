@@ -16,6 +16,15 @@ test('robots.txt disallows case studies and points to the sitemap', function ():
     $response->assertSee('Sitemap: '.url('/sitemap.xml'), false);
 });
 
+test('every page has a favicon, apple touch icon, and og:image', function (): void {
+    $response = $this->get('/');
+
+    $response->assertOk();
+    $response->assertSee('images/brand/icon-32.png', false);
+    $response->assertSee('images/brand/icon-180.png', false);
+    $response->assertSee('images/brand/og-image.png', false);
+});
+
 test('every page carries LocalBusiness structured data for Greenville SC', function (): void {
     $response = $this->get('/');
 

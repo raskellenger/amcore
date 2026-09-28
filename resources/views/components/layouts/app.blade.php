@@ -7,6 +7,17 @@
     <title>{{ $title ?? 'AmCore Systems' }}</title>
     <meta name="description" content="{{ $description ?? 'Operating systems for the trades. Built by tradesmen. Run for you.' }}">
 
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/brand/icon-32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/brand/icon-16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/brand/icon-180.png') }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AmCore Systems">
+    <meta property="og:title" content="{{ $title ?? 'AmCore Systems' }}">
+    <meta property="og:description" content="{{ $description ?? 'Operating systems for the trades. Built by tradesmen. Run for you.' }}">
+    <meta property="og:image" content="{{ asset('images/brand/og-image.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
+
     @if (request()->routeIs('case-studies'))
         <meta name="robots" content="noindex, nofollow">
     @endif
