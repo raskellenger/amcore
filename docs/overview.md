@@ -24,7 +24,7 @@ Owners and operators of trades businesses in the Upstate, typically 5-50 people,
 4. **How We Work** — expanded delivery timeline, what AmCore needs from the client, training, ongoing support.
 5. **About** — trades background, Greenville focus, values (placeholder), founder bios and photos (placeholder).
 6. **FAQ** — 12 questions covering offline behavior, data ownership, business-continuity, security claims, pricing, scope, and trades served.
-7. **Contact / Book a Discovery Call** — the one interactive feature on the site: a validated, honeypot-protected, rate-limited form that saves a `Lead` and queues a notification email.
+7. **Contact / Book a Discovery Call** — the one interactive feature on the site: a validated, honeypot-protected, rate-limited form (built, live) that saves a `Lead` and queues a notification email.
 8. **Case Studies** — built, not linked or indexed, until a client approves sharing their story.
 9. **Privacy Policy & Terms of Use** — plain-language drafts, marked "DRAFT — attorney review required."
 

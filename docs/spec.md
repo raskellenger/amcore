@@ -29,7 +29,7 @@ All routes are `Volt::route()` full-page components, defined in `routes/web.php`
 | `/privacy` | `privacy` | `pages.privacy` |
 | `/terms` | `terms` | `pages.terms` |
 
-All nine sitemap pages currently render structural placeholders (`resources/views/livewire/pages/*.blade.php`) pending copy approval. `case-studies` additionally carries a `noindex, nofollow` meta tag (layout checks `request()->routeIs('case-studies')`) and is excluded from `/sitemap.xml` and disallowed in `/robots.txt`. No auth, no admin routes, no lead-listing routes exist or are planned.
+All nine sitemap pages render real, approved copy (`resources/views/livewire/pages/*.blade.php`) except `case-studies`, which is an intentional placeholder per the brief (unlinked, unindexed until a client approves sharing their story — `noindex, nofollow`, excluded from `/sitemap.xml` and disallowed in `/robots.txt`). Home uses headline option A ("Operating systems for the trades.") by default. No auth, no admin routes, no lead-listing routes exist or are planned.
 
 `/robots.txt` and `/sitemap.xml` are plain closures in `routes/web.php` (not static `public/` files), so the host always matches `APP_URL` in every environment. `resources/views/errors/404.blade.php` is a branded 404 reusing the marketing layout.
 
@@ -62,13 +62,16 @@ Rate limiting is enforced **inside** `SubmitDiscoveryRequest::handle()` (5 attem
 - `tests/Feature/Actions/SubmitDiscoveryRequestTest.php` — persistence, validation (missing fields, bad email, invalid trade), honeypot silent-drop, queued dispatch.
 - `tests/Feature/Actions/SendDiscoveryRequestNotificationTest.php` — mail queued for the correct lead.
 - `tests/Feature/MarketingPagesTest.php` — every route returns 200 and contains its expected title fragment.
+- `tests/Feature/Pages/HomePageTest.php` — home page's hero, pain points, pillars, modules, and timeline all render.
+- `tests/Feature/Pages/ContactPageTest.php` — full Volt component coverage via `Volt::test()`: successful submission, validation errors, honeypot silent-success, rate-limit message.
+- `tests/Feature/LaunchReadinessTest.php` — 404 page, robots.txt, sitemap.xml, favicon/OG tags, structured data.
 - `RefreshDatabase` is enabled workspace-wide via `tests/Pest.php`.
 
 Quality gate (must be clean before every commit): `composer rector-dry` → `composer rector` → `composer pint` → `composer stan` (Larastan, `--memory-limit=1G`) → `./vendor/bin/pest` → verify in browser.
 
 ## Known gaps / not yet built
 
-- Contact page: real copy + working Volt form wired to `SubmitDiscoveryRequest` (blocked on copy approval). Rate limiting and honeypot are already implemented at the Action level and fully tested.
-- Favicon / OG image: needs a precise crop of the real logo mark (`resources/brand-source/amcore-logo-navy-transparent.png`) — not yet produced.
-- Unique per-page meta descriptions — blocked on copy approval. (Sitemap.xml, robots.txt, custom 404, and LocalBusiness structured data are done — address is placeholder-only, city/state confirmed.)
+- Unique per-page meta descriptions (every page currently shares the layout's default description).
+- Case Studies real content — intentionally deferred until a client approves sharing their story.
 - GitHub remote, domain, Sentry DSN, SES verified identity, Laravel Cloud — all placeholders, see `docs/reference.md`.
+- Real photography to replace the generator-prompt placeholders (hero, trades strip, etc.) — no images are embedded on any page yet, only copy.
