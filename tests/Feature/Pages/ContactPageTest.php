@@ -57,6 +57,14 @@ test('a honeypot submission shows success without creating a lead', function ():
     $this->assertDatabaseCount('leads', 0);
 });
 
+test('the honeypot field is clipped, not pushed off-screen', function (): void {
+    $response = $this->get('/contact');
+
+    $response->assertOk();
+    $response->assertDontSee('-left-[9999px]', false);
+    $response->assertSee('h-0 w-0 overflow-hidden', false);
+});
+
 test('it rate limits repeated submissions and shows a message instead of a 500', function (): void {
     Bus::fake();
 

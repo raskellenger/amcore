@@ -58,8 +58,8 @@ $submit = function () {
         </div>
     @else
         <form wire:submit="submit" class="mt-10 space-y-5" wire:key="form">
-            {{-- Honeypot — visually hidden from real visitors, left for bots --}}
-            <div class="absolute -left-[9999px]" aria-hidden="true">
+            {{-- Honeypot — zero-size clipped box, never visible, never announced, can't cause horizontal overflow --}}
+            <div class="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
                 <label for="website">Website</label>
                 <input type="text" id="website" wire:model="website" tabindex="-1" autocomplete="off">
             </div>
