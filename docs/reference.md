@@ -34,7 +34,7 @@ Defined in `resources/css/app.css` (`@theme` block) and mirrored in `CLAUDE.md`.
 | Phone number / email for click-to-call | Contact page | Not yet provided. |
 | Domain name | Site-wide (canonical URLs, SES identity, structured data) | To be registered at Namesilo. |
 | GitHub org/repo name | Infra | User confirmed: private repo, AmCore's own org, name TBD. |
-| Favicon / OG image | Site-wide `<head>`, social shares | Needs an exact crop of the real logo mark — not AI-generated. See `resources/brand-source/`. |
+| Favicon / OG image | Done (`public/images/brand/`) | Cropped from the real logo via `sips` (no vector source yet) — usable but not pixel-perfect. Revisit once the Logo Segments zip is accessible. |
 | Hero / section photography | Home, About, Operating Systems, How We Work | Generator prompts delivered to user in chat; peopleless/faceless-enough by design. Real photos preferred when available. |
 | Case studies content | Case Studies page | Page built, unlinked/unindexed until a client approves sharing their story. |
 | Privacy Policy / Terms of Use | Legal pages | Plain-language drafts only — marked "DRAFT — attorney review required." |
