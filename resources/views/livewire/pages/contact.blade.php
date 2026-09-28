@@ -22,6 +22,7 @@ state([
     'website' => '',
     'submitted' => false,
     'rateLimited' => false,
+    'rateLimitedForSeconds' => 0,
 ]);
 
 $submit = function () {
@@ -33,8 +34,9 @@ $submit = function () {
         SubmitDiscoveryRequest::run($this->only([
             'name', 'company', 'trade', 'crew_size', 'phone', 'email', 'headache', 'preferred_contact_method', 'website',
         ]), request()->ip());
-    } catch (TooManyDiscoveryRequestsException) {
+    } catch (TooManyDiscoveryRequestsException $e) {
         $this->rateLimited = true;
+        $this->rateLimitedForSeconds = $e->availableInSeconds;
 
         return;
     }
@@ -133,7 +135,7 @@ $submit = function () {
 
             @if ($rateLimited)
                 <p class="rounded border border-brick/30 bg-brick/5 px-3 py-2 text-sm text-brick">
-                    Too many discovery call requests from this connection. Try again in a few minutes, or call us directly.
+                    Too many discovery call requests from this connection. Try again in about {{ $rateLimitedForSeconds }} seconds, or call us directly.
                 </p>
             @endif
 

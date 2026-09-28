@@ -84,5 +84,9 @@ test('it rate limits repeated submissions and shows a message instead of a 500',
     $component->assertSet('submitted', false);
     $component->assertSee('Too many discovery call requests');
 
+    $secondsRemaining = $component->get('rateLimitedForSeconds');
+    expect($secondsRemaining)->toBeGreaterThan(0)->toBeLessThanOrEqual(60);
+    $component->assertSee("about {$secondsRemaining} seconds");
+
     $this->assertDatabaseCount('leads', 5);
 });
