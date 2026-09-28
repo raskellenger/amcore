@@ -38,6 +38,7 @@ Defined in `resources/css/app.css` (`@theme` block) and mirrored in `CLAUDE.md`.
 | Hero / section photography | Home, About, Operating Systems, How We Work | Generator prompts delivered to user in chat; peopleless/faceless-enough by design. Real photos preferred when available. |
 | Case studies content | Case Studies page | Page built, unlinked/unindexed until a client approves sharing their story. |
 | Privacy Policy / Terms of Use | Legal pages | Plain-language drafts only — marked "DRAFT — attorney review required." |
+| Analytics provider | Site-wide `<head>` | Wiring is done (`config('services.analytics.*')`, `ANALYTICS_SCRIPT_URL`/`ANALYTICS_DOMAIN` in `.env`) and inert until a provider is picked — no vendor chosen or invented. |
 | SES sending domain verification | Production mail | AmCore's own verified identity, not a hub relay (this app is independent). |
 | Sentry DSN | `config/sentry.php` / `.env` | Required before first production deploy. |
 | Laravel Cloud account | Deploy | AmCore's own account. Hibernation OFF (public marketing site). Deploy only when explicitly asked. |
