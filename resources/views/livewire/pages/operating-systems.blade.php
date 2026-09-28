@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('Operating Systems — AmCore Systems');
 
+view()->share('description', 'Eight modules — work orders, scheduling, invoicing, and more — one system configured to your trades business. Hosting and support included.');
+
 ?>
 
 @php

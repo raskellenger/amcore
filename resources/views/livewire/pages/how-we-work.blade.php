@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('How We Work — AmCore Systems');
 
+view()->share('description', "From discovery to going live in about 60 days — AmCore's full delivery timeline, training, and ongoing support.");
+
 ?>
 
 @php

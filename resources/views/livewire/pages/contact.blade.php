@@ -8,6 +8,8 @@ use function Livewire\Volt\{layout, title, state};
 layout('components.layouts.app');
 title('Book a Discovery Call — AmCore Systems');
 
+view()->share('description', 'Book a discovery call with AmCore Systems — serving Greenville and the Upstate.');
+
 state([
     'name' => '',
     'company' => '',

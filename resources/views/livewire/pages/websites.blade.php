@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('Websites — AmCore Systems');
 
+view()->share('description', 'Fast, mobile-first websites for trades businesses, built to get the phone to ring.');
+
 ?>
 
 <div class="mx-auto max-w-3xl px-6 py-24">

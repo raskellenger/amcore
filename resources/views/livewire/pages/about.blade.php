@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('About — AmCore Systems');
 
+view()->share('description', 'AmCore Systems is a Greenville, SC company building business operating systems for trades businesses across the Upstate.');
+
 ?>
 
 <div class="mx-auto max-w-3xl px-6 py-24">

@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('FAQ — AmCore Systems');
 
+view()->share('description', "Answers on offline access, data ownership, security, pricing, and what AmCore does and doesn't do.");
+
 ?>
 
 @php

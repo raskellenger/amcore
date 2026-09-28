@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('Privacy Policy — AmCore Systems');
 
+view()->share('description', 'AmCore Systems privacy policy (draft) — what we collect from the contact form and how we use it.');
+
 ?>
 
 <div class="mx-auto max-w-2xl px-6 py-24">

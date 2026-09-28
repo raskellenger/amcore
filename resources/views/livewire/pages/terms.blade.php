@@ -5,6 +5,8 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('Terms of Use — AmCore Systems');
 
+view()->share('description', 'AmCore Systems terms of use (draft).');
+
 ?>
 
 <div class="mx-auto max-w-2xl px-6 py-24">

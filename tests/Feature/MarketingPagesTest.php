@@ -27,3 +27,16 @@ test('the case studies page is not indexed', function (): void {
 test('other pages do not carry the noindex tag', function (): void {
     $this->get('/')->assertDontSee('noindex, nofollow', false);
 });
+
+test('every indexable page has its own unique meta description', function (): void {
+    $descriptions = collect([
+        '/', '/operating-systems', '/websites', '/how-we-work', '/about', '/faq', '/contact', '/privacy', '/terms',
+    ])->map(function (string $uri): string {
+        preg_match('/<meta name="description" content="([^"]+)">/', $this->get($uri)->getContent(), $matches);
+
+        return $matches[1] ?? '';
+    });
+
+    expect($descriptions)->each->not->toBeEmpty();
+    expect($descriptions->unique())->toHaveCount($descriptions->count());
+});
