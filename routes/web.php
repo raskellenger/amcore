@@ -10,7 +10,7 @@ Route::get('/robots.txt', fn () => response(
 )->header('Content-Type', 'text/plain'))->name('robots');
 
 Route::get('/sitemap.xml', function () {
-    $routes = ['home', 'operating-systems', 'websites', 'how-we-work', 'about', 'faq', 'contact', 'privacy', 'terms'];
+    $routes = ['home', 'operating-systems', 'trades', 'websites', 'how-we-work', 'about', 'faq', 'contact', 'privacy', 'terms'];
 
     $urls = collect($routes)->map(fn (string $name): string => '    <url><loc>'.route($name).'</loc></url>')->implode("\n");
 
@@ -21,11 +21,19 @@ Route::get('/sitemap.xml', function () {
 
 Volt::route('/', 'pages.home')->name('home');
 Volt::route('/operating-systems', 'pages.operating-systems')->name('operating-systems');
+Volt::route('/trades', 'pages.trades')->name('trades');
 Volt::route('/websites', 'pages.websites')->name('websites');
 Volt::route('/how-we-work', 'pages.how-we-work')->name('how-we-work');
 Volt::route('/about', 'pages.about')->name('about');
 Volt::route('/faq', 'pages.faq')->name('faq');
 Volt::route('/contact', 'pages.contact')->name('contact');
+Volt::route('/hero-lab', 'pages.hero-lab')->name('hero-lab');
+Volt::route('/logo-lab', 'pages.logo-lab')->name('logo-lab');
+
+// Writes WHITEBOARD.md. Registered for local and for the test suite. Production does not get the route.
+if (app()->environment(['local', 'testing'])) {
+    Volt::route('/whiteboard', 'pages.whiteboard')->name('whiteboard');
+}
 Volt::route('/case-studies', 'pages.case-studies')->name('case-studies');
 Volt::route('/privacy', 'pages.privacy')->name('privacy');
 Volt::route('/terms', 'pages.terms')->name('terms');

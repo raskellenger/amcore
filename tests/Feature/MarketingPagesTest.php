@@ -10,6 +10,7 @@ test('every marketing page responds with 200 and a unique title', function (stri
 })->with([
     'home' => ['/', 'AmCore Systems'],
     'operating systems' => ['/operating-systems', 'Operating Systems'],
+    'trades' => ['/trades', 'Trades We Serve'],
     'websites' => ['/websites', 'Websites'],
     'how we work' => ['/how-we-work', 'How We Work'],
     'about' => ['/about', 'About'],
@@ -30,7 +31,7 @@ test('other pages do not carry the noindex tag', function (): void {
 
 test('every indexable page has its own unique meta description', function (): void {
     $descriptions = collect([
-        '/', '/operating-systems', '/websites', '/how-we-work', '/about', '/faq', '/contact', '/privacy', '/terms',
+        '/', '/operating-systems', '/trades', '/websites', '/how-we-work', '/about', '/faq', '/contact', '/privacy', '/terms',
     ])->map(function (string $uri): string {
         preg_match('/<meta name="description" content="([^"]+)">/', $this->get($uri)->getContent(), $matches);
 

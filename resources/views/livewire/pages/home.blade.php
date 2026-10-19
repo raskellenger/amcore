@@ -21,35 +21,80 @@ $modules = [
     ['icon' => 'chat-bubble-left-right', 'name' => 'Notifications & Messaging', 'line' => 'Everyone on the job sees the same information, at the same time.'],
 ];
 
-$timeline = [
-    'Discovery at your shop',
-    'Build (about 2 weeks)',
-    'Walkthrough and revisions',
-    'Field test with a few crews on live jobs',
-    'Turnover — goes live company-wide',
-    'In-person training for every role',
-    'Ongoing hosting, maintenance, and support',
-];
 @endphp
 
 <div>
-    {{-- Hero --}}
-    <section class="border-b border-navy/10 bg-offwhite">
-        <div class="mx-auto max-w-4xl px-6 py-24 text-center">
-            <h1 class="font-heading text-4xl font-semibold text-navy sm:text-5xl">Operating systems for the trades.</h1>
-            <p class="mx-auto mt-5 max-w-2xl text-lg text-ink/70">
-                One system for work orders, scheduling, invoicing, and the paperwork that piles up between jobs — configured to how your crew already works.
-            </p>
-            <a href="{{ route('contact') }}" wire:navigate
-                class="mt-8 inline-flex items-center rounded bg-brick px-6 py-3 font-semibold text-white transition hover:bg-brick/90">
-                Book a Discovery Call
-            </a>
+    {{-- Hero: the puzzle. Loose pieces lock into one system. No stock photo. --}}
+    <section class="border-b border-steel" x-data="{
+        solved: false,
+        tiles: [
+            { mess: 'Napkin estimate', system: 'Estimates', r: -8, tx: -14, ty: 12 },
+            { mess: 'Who is on the job?', system: 'Work orders', r: 7, tx: 16, ty: -10 },
+            { mess: 'Invoice not sent', system: 'Invoicing', r: -6, tx: 10, ty: 14 },
+            { mess: 'Parts in a text', system: 'Inventory', r: 11, tx: -18, ty: -8 },
+            { mess: 'Whiteboard schedule', system: 'Scheduling', r: -12, tx: 8, ty: 12 },
+            { mess: 'Did it make money?', system: 'Job costing', r: 6, tx: -10, ty: -16 },
+        ]
+    }">
+        <div class="mx-auto grid w-full max-w-[1200px] items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:py-24">
+            <div>
+                <span class="eyebrow">Upstate, South Carolina · Built for the trades</span>
+                <h1 class="mt-5 text-4xl font-medium leading-[1.1] text-cream sm:text-[56px]">Operating systems for the trades.</h1>
+                <p class="mt-5 max-w-xl text-lg text-cream/80">
+                    One system for work orders, scheduling, invoicing, and the paperwork that piles up between jobs — configured to how your crew already works.
+                </p>
+                <div class="mt-8 grid gap-3 sm:grid-cols-2">
+                    <a href="{{ route('contact') }}" wire:navigate class="hover-card block rounded border border-steel bg-graphite p-4 text-cream">
+                        <span class="font-heading font-medium">I'm on a pile of apps</span>
+                        <span class="mt-1 block text-sm text-cream/70">Too many logins, tabs, and keys.</span>
+                    </a>
+                    <a href="{{ route('contact') }}" wire:navigate class="hover-card block rounded border border-steel bg-graphite p-4 text-cream">
+                        <span class="font-heading font-medium">I'm on paper</span>
+                        <span class="mt-1 block text-sm text-cream/70">Binders, carbon copies, a filing cabinet.</span>
+                    </a>
+                </div>
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <a href="{{ route('contact') }}" wire:navigate
+                        class="inline-flex items-center rounded bg-brick px-6 py-3 text-sm font-medium text-cream transition hover:bg-brick/90 btn-arrow">
+                        Book a Discovery Call
+                    </a>
+                    <a href="{{ route('how-we-work') }}" wire:navigate class="inline-flex items-center rounded border border-cream/40 px-6 py-3 text-sm font-medium text-cream transition hover:border-cream btn-arrow">
+                        How we work
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="overflow-hidden rounded bg-carbon p-4 sm:p-6">
+                    <div class="flex flex-wrap items-baseline justify-between gap-2">
+                        <p class="font-heading text-lg font-medium text-cream" x-text="solved ? 'AmCore' : 'Loose pieces'">Loose pieces</p>
+                        <p class="text-slate" x-text="solved ? 'One system. You run the business.' : 'Not a system yet.'">Not a system yet.</p>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3"
+                        :class="solved ? 'rounded border-2 border-steel bg-graphite p-2' : ''">
+                        <template x-for="(t, i) in tiles" :key="t.system">
+                            <div class="relative z-0 flex min-h-28 items-center justify-center rounded border border-brick/40 bg-graphite px-3 py-4 text-center text-base font-semibold leading-tight text-cream transition-all duration-700 ease-out motion-reduce:transition-none"
+                                :class="solved ? '!z-10 !border-steel' : ''"
+                                :style="`transform: rotate(${solved ? 0 : t.r}deg) translate(${solved ? 0 : t.tx}px, ${solved ? 0 : t.ty}px); transition-delay:${solved ? i * 50 : 0}ms`">
+                                <span class="transition-opacity duration-300" :class="solved ? 'opacity-0' : 'opacity-100'" x-text="t.mess"></span>
+                                <span class="absolute inset-0 flex items-center justify-center px-3 text-center transition-opacity duration-500" :class="solved ? 'opacity-100' : 'opacity-0'" x-text="t.system"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <p class="mt-4 text-cream/80" aria-live="polite" x-text="solved ? 'The pieces are AmCore. The crew does the job. You see the business.' : 'Six things only you are holding.'">Six things only you are holding.</p>
+                <button type="button" @click="solved = !solved"
+                    class="mt-3 rounded bg-brick px-5 py-3 text-base font-semibold text-cream hover:bg-brick/90"
+                    x-text="solved ? 'Start over' : 'Put it together'">Put it together</button>
+            </div>
         </div>
     </section>
 
     {{-- Pain points --}}
     <section class="mx-auto max-w-4xl px-6 py-20">
-        <h2 class="font-heading text-2xl font-semibold text-navy">Sound familiar?</h2>
+        <span class="eyebrow mb-4">The problem</span>
+        <h2 class="font-heading text-2xl font-medium text-cream">Sound familiar?</h2>
+        <p class="mt-3 max-w-2xl text-slate">Work orders are only the start. Jobs, contacts, sales, and finances all live in different places.</p>
         <ul class="mt-6 grid gap-4 sm:grid-cols-2">
             @foreach ([
                 "Hours lost re-typing the same work order three times.",
@@ -57,8 +102,10 @@ $timeline = [
                 "Invoices going out weeks after the job's done.",
                 "No real picture of job cost, or who still owes you money.",
                 "Details buried in texts and email nobody can find later.",
+                "Hopping between systems to track jobs, contacts, sales, and finances.",
+                "Multiple logins, probably all sharing the same password.",
             ] as $pain)
-                <li class="flex gap-3 rounded border border-navy/10 bg-white p-4 text-ink/80">
+                <li class="hover-card flex gap-3 rounded border border-steel bg-graphite p-4 text-cream/80">
                     <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brick"></span>
                     {{ $pain }}
                 </li>
@@ -66,22 +113,47 @@ $timeline = [
         </ul>
     </section>
 
+    {{-- What it replaces --}}
+    <section class="mx-auto max-w-5xl px-6 pb-20">
+        <span class="eyebrow mb-4">Why we call it an operating system</span>
+        <h2 class="font-heading text-2xl font-medium text-cream sm:text-3xl">One place for the whole job.</h2>
+        <p class="mt-3 max-w-2xl text-lg text-cream/80">Not an ERP. Not a CRM. Not a project-management tool. It's all of them, built as one thing, with more modules you can turn on as you grow.</p>
+        <div class="mt-8 grid gap-5 md:grid-cols-2">
+            <div class="rounded border border-steel bg-graphite p-6">
+                <p class="mono text-xs text-slate">TODAY</p>
+                <ul class="mt-3 space-y-2 text-cream/80">
+                    <li>A login for the books</li>
+                    <li>A login for the schedule</li>
+                    <li>A tab for the customer list</li>
+                    <li>A binder for the paperwork</li>
+                    <li>A text thread for everything else</li>
+                </ul>
+            </div>
+            <div class="rounded border-2 border-brick bg-graphite p-6">
+                <p class="mono text-xs text-signal">WITH AMCORE</p>
+                <p class="mt-3 font-heading text-xl font-medium text-cream">One login. One place.</p>
+                <p class="mt-2 text-cream/80">Jobs, contacts, sales, and finances in the same system, on the same screen, behind the one password you actually remember.</p>
+            </div>
+        </div>
+    </section>
+
     {{-- Five pillars --}}
-    <section class="border-y border-navy/10 bg-navy text-offwhite">
+    <section class="border-y border-steel bg-graphite text-cream">
         <div class="mx-auto max-w-5xl px-6 py-20">
-            <h2 class="font-heading text-2xl font-semibold">Five reasons this is different</h2>
+            <span class="eyebrow mb-4">Why AmCore</span>
+            <h2 class="font-heading text-2xl font-medium sm:text-3xl">Five reasons this is different</h2>
             <ol class="mt-8 grid gap-8 sm:grid-cols-2">
                 @foreach ([
                     ['Built for the people doing the work.', 'Phone-first. Voice-to-text notes. Works with no signal on site and syncs when you\'re back in range.'],
                     ['Configured to how you already work.', 'Your forms, your terms, your process — we build the system around your business, not the other way around.'],
-                    ['We run it for you.', 'Hosting, updates, security, and daily backups are included. Something breaks, you call a real person.'],
+                    ['We keep it secure and up to date.', 'Hosting, updates, security, and daily off-site backups are included, and your system gets our attention, not a shared queue. Something wrong, you call a real person.'],
                     ['Local, not faceless.', 'Based in Greenville. Discovery and training happen in person, at your shop.'],
                     ['Straightforward terms.', 'One setup fee. One monthly fee. No per-user fees. You own your data and can export it any time.'],
                 ] as $i => [$headline, $body])
                     <li>
-                        <p class="font-heading text-bronze">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</p>
-                        <h3 class="mt-1 font-heading text-lg font-semibold">{{ $headline }}</h3>
-                        <p class="mt-2 text-offwhite/75">{{ $body }}</p>
+                        <p class="mono text-xs text-signal">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</p>
+                        <h3 class="mt-1 font-heading text-lg font-medium">{{ $headline }}</h3>
+                        <p class="mt-2 text-cream/75">{{ $body }}</p>
                     </li>
                 @endforeach
             </ol>
@@ -90,58 +162,58 @@ $timeline = [
 
     {{-- Eight modules --}}
     <section class="mx-auto max-w-5xl px-6 py-20">
-        <h2 class="font-heading text-2xl font-semibold text-navy">Eight modules, one system</h2>
-        <p class="mt-2 max-w-2xl text-ink/70">Everything a trades business needs to run, in one place.</p>
+        <span class="eyebrow mb-4">What is inside</span>
+        <h2 class="font-heading text-2xl font-medium text-cream">Eight modules, one system</h2>
+        <p class="mt-2 max-w-2xl text-slate">Everything a trades business needs to run, in one place. Take what fits your shop now. Add the rest later.</p>
         <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($modules as $module)
-                <div class="rounded border border-navy/10 bg-white p-5">
-                    <flux:icon :name="$module['icon']" class="size-6 text-brick" aria-hidden="true" />
-                    <h3 class="mt-3 font-heading font-semibold text-navy">{{ $module['name'] }}</h3>
-                    <p class="mt-1 text-sm text-ink/70">{{ $module['line'] }}</p>
+                <div class="hover-card rounded border border-steel bg-graphite p-5">
+                    <span class="icon-chip"><flux:icon :name="$module['icon']" class="size-5" aria-hidden="true" /></span>
+                    <h3 class="mt-3 font-heading font-medium text-cream">{{ $module['name'] }}</h3>
+                    <p class="mt-1 text-sm text-slate">{{ $module['line'] }}</p>
                 </div>
             @endforeach
         </div>
     </section>
 
-    {{-- Timeline --}}
-    <section class="border-y border-navy/10 bg-offwhite">
-        <div class="mx-auto max-w-4xl px-6 py-20">
-            <h2 class="font-heading text-2xl font-semibold text-navy">How it works</h2>
-            <p class="mt-2 text-ink/70">About 60 days from kickoff to running on your own.</p>
-            <ol class="mt-8 space-y-4">
-                @foreach ($timeline as $i => $step)
-                    <li class="flex items-center gap-4">
-                        <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-navy font-heading text-sm text-white">{{ $i + 1 }}</span>
-                        <span class="text-ink/80">{{ $step }}</span>
-                    </li>
-                @endforeach
-            </ol>
-        </div>
-    </section>
-
     {{-- Trades strip --}}
+    <section class="mx-auto max-w-[1200px] px-6 pt-20">
+        <x-photo name="home-trades" ratio="21/9" position="center 55%" label="A working shop: tools, benches, the real thing" alt="Tools laid out in a working shop" />
+    </section>
     <section class="mx-auto max-w-3xl px-6 py-20 text-center">
-        <h2 class="font-heading text-2xl font-semibold text-navy">Built by people from the trades</h2>
-        <p class="mt-4 text-ink/70">
+        <span class="eyebrow mb-4">Who we are</span>
+        <h2 class="font-heading text-2xl font-medium text-cream">Built by people from the trades</h2>
+        <p class="mt-4 text-slate">
             AmCore was started by people who've done the work — paint and drywall crews on national homebuilder jobs, residential repaint, trenching, crawlspaces, plumbing. And the paperwork side too: scheduling, billing, chasing down invoices. We built the system we wished we'd had.
         </p>
     </section>
 
+    {{-- Trades --}}
+    <section class="mx-auto max-w-4xl px-6 pb-20 text-center">
+        <h2 class="font-heading text-xl font-medium text-cream">Plumbing. HVAC. Electrical. Painting &amp; drywall. Roofing.</h2>
+        <p class="mt-3 text-slate">Every trade has its own words and its own paperwork. We configure the system to yours. Tile, flooring, landscaping, something else? If you'll give us the time for a proper discovery, we can make it work.</p>
+        <a href="{{ route('trades') }}" wire:navigate class="mt-4 inline-block font-medium text-signal hover:underline">See how it fits your trade &rarr;</a>
+    </section>
+
     {{-- Websites cross-sell --}}
-    <section class="border-y border-navy/10 bg-white">
+    <section class="border-y border-steel bg-graphite">
         <div class="mx-auto flex max-w-4xl flex-col items-center gap-4 px-6 py-14 text-center">
-            <h2 class="font-heading text-xl font-semibold text-navy">Need a website too?</h2>
-            <p class="text-ink/70">We also build fast, mobile-first sites for trades businesses, built to get the phone to ring.</p>
-            <a href="{{ route('websites') }}" wire:navigate class="font-semibold text-brick hover:underline">See Websites &rarr;</a>
+            <h2 class="font-heading text-xl font-medium text-cream">Need a website too?</h2>
+            <p class="text-slate">We also build fast, mobile-first sites for trades businesses, built to get the phone to ring.</p>
+            <a href="{{ route('websites') }}" wire:navigate class="font-medium text-signal hover:underline">See Websites &rarr;</a>
         </div>
     </section>
 
     {{-- Final CTA --}}
-    <section class="mx-auto max-w-3xl px-6 py-24 text-center">
-        <h2 class="font-heading text-2xl font-semibold text-navy">Ready to see it running on your own jobs?</h2>
-        <a href="{{ route('contact') }}" wire:navigate
-            class="mt-6 inline-flex items-center rounded bg-brick px-6 py-3 font-semibold text-white transition hover:bg-brick/90">
-            Book a Discovery Call
-        </a>
+    <section class="relative isolate overflow-hidden border-t border-steel">
+        <x-photo name="home-cta" ratio="21/9" fill position="center 60%" label="Roofer on a new roof" alt="A roofer installing shingles" class="absolute inset-0 -z-20 rounded-none border-0" />
+        <div class="absolute inset-0 -z-10 bg-carbon/75"></div>
+        <div class="mx-auto max-w-3xl px-6 py-28 text-center">
+            <h2 class="font-heading text-2xl font-medium text-cream sm:text-4xl">Ready to see it running on your own jobs?</h2>
+            <a href="{{ route('contact') }}" wire:navigate
+                class="mt-8 inline-flex items-center rounded bg-brick px-6 py-3 text-sm font-medium text-cream transition hover:bg-brick/90 btn-arrow">
+                Book a Discovery Call
+            </a>
+        </div>
     </section>
 </div>

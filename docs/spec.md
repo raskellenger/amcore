@@ -72,10 +72,10 @@ The contact form: every field's error message is linked to its input via `aria-d
 - `tests/Feature/Actions/SubmitDiscoveryRequestTest.php` — persistence, validation (missing fields, bad email, invalid trade), honeypot silent-drop, queued dispatch.
 - `tests/Feature/Actions/SendDiscoveryRequestNotificationTest.php` — mail queued for the correct lead.
 - `tests/Feature/MarketingPagesTest.php` — every route returns 200 and contains its expected title fragment.
-- `tests/Feature/Pages/HomePageTest.php` — home page's hero, pain points, pillars, modules, and timeline all render.
+- `tests/Feature/Pages/HomePageTest.php` — home page's hero, pain points, pillars, and modules all render.
 - `tests/Feature/Pages/ContactPageTest.php` — full Volt component coverage via `Volt::test()`: successful submission, validation errors, honeypot silent-success, rate-limit message.
 - `tests/Feature/LaunchReadinessTest.php` — 404 page, robots.txt, sitemap.xml, favicon/OG tags, structured data, security headers, no lead-exposing route exists.
-- `tests/Feature/AccessibilityTest.php` — no page uses a sub-AA-contrast text class or bronze-as-text.
+- `tests/Feature/AccessibilityTest.php` — no page uses a sub-AA-contrast text class (contrast only).
 - `RefreshDatabase` is enabled workspace-wide via `tests/Pest.php`.
 
 Quality gate (must be clean before every commit): `composer rector-dry` → `composer rector` → `composer pint` → `composer stan` (Larastan, `--memory-limit=1G`) → `./vendor/bin/pest` → verify in browser.

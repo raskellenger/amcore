@@ -5,46 +5,53 @@ use function Livewire\Volt\{layout, title};
 layout('components.layouts.app');
 title('How We Work — AmCore Systems');
 
-view()->share('description', "From discovery to going live in about 60 days — AmCore's full delivery timeline, training, and ongoing support.");
+view()->share('description', "How AmCore works with you: discovery at your shop, in-person training, and ongoing support.");
 
 ?>
 
 @php
-$timeline = [
-    ['Discovery at your shop.', 'We sit down with your team, look at your actual paperwork, and see how jobs really move from call to invoice.'],
-    ['Build (about 2 weeks).', 'We configure the system around what we saw — your forms, your terms, your process.'],
-    ['Walkthrough and revisions.', "You see it running, and tell us what's off before anyone touches it on a real job."],
-    ['Field test.', 'A few crews run it on live jobs, so problems surface before the whole company depends on it.'],
-    ['Turnover.', 'It goes live company-wide.'],
-    ['Training.', 'In person, at your shop, for every role that touches it — office and field.'],
-    ['Ongoing support.', "Hosting, maintenance, and a real person to call, for as long as you're running it."],
-];
+
 @endphp
 
 <div class="mx-auto max-w-3xl px-6 py-24">
-    <h1 class="font-heading text-4xl font-semibold text-navy">How We Work</h1>
-    <p class="mt-4 text-lg text-ink/70">About 60 days from a first conversation to running the system company-wide, on your own.</p>
+    <span class="eyebrow mb-5">How we work</span>
+    <h1 class="font-heading text-4xl font-medium text-cream">How We Work</h1>
+    <p class="mt-4 text-lg text-slate">In person, at your shop, with the people who do the work.</p>
 
-    <h2 class="mt-14 font-heading text-xl font-semibold text-navy">The timeline</h2>
-    <ol class="mt-6 space-y-6">
-        @foreach ($timeline as $i => [$headline, $body])
-            <li class="flex gap-4">
-                <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-navy font-heading text-sm text-white">{{ $i + 1 }}</span>
-                <div>
-                    <p class="font-semibold text-navy">{{ $headline }}</p>
-                    <p class="mt-1 text-ink/70">{{ $body }}</p>
-                </div>
+    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <x-photo name="how-discovery" ratio="3/2" label="Discovery at the shop" alt="A technician inspecting equipment" />
+        <x-photo name="how-training" ratio="3/2" position="center 20%" label="In-person training" alt="A worker holding a wrench" />
+        <x-photo name="how-field" ratio="3/2" position="center 55%" label="Crew on a live job" alt="A crew working on scaffolding" />
+    </div>
+
+
+    <h2 class="mt-14 font-heading text-xl font-medium text-cream">The stages</h2>
+    <p class="mt-3 text-cream/80">No fixed dates. We move at the pace of your jobs, and we give you a real timeline on the discovery call.</p>
+    <ol class="mt-6 space-y-4">
+        @foreach ([
+            ['Discovery with the owner', 'What you want the business to look like, what keeps you up, and what you need to see.'],
+            ['Discovery with the field', 'Time with the crews. How a job really runs, what gets written down, what gets lost.'],
+            ['Discovery with the office', 'Time with whoever does the scheduling, billing, and chasing invoices.'],
+            ['Configuration', 'We build the system around your forms, your terms, and your process.'],
+            ['A trial on real jobs', 'A few crews run it on live work. We fix what they find.'],
+            ['In-person training, then rollout', 'We train your people at your shop and turn it on for everyone.'],
+            ['Ongoing support', 'A real person you can call. Updates and security stay with us.'],
+        ] as $i => [$stage, $detail])
+            <li class="hover-card rounded border border-steel bg-graphite p-4">
+                <p class="mono text-xs text-signal">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</p>
+                <h3 class="mt-1 font-heading font-medium text-cream">{{ $stage }}</h3>
+                <p class="mt-1 text-cream/80">{{ $detail }}</p>
             </li>
         @endforeach
     </ol>
 
-    <h2 class="mt-14 font-heading text-xl font-semibold text-navy">What we need from you</h2>
-    <p class="mt-3 text-ink/80">
-        Time with the people who actually do the work — office and field. Copies of the paperwork you use today: work orders, estimates, invoices. And a few crews willing to run it on real jobs before the full rollout.
+    <h2 class="mt-14 font-heading text-xl font-medium text-cream">What we need from you</h2>
+    <p class="mt-3 text-cream/80">
+        Time with the people who actually do the work, office and field. Copies of the paperwork you use today: work orders, estimates, invoices. And a few crews willing to run it on real jobs before the full rollout.
     </p>
 
     <div class="mt-14">
-        <a href="{{ route('contact') }}" wire:navigate class="inline-flex items-center rounded bg-brick px-6 py-3 font-semibold text-white transition hover:bg-brick/90">
+        <a href="{{ route('contact') }}" wire:navigate class="inline-flex items-center rounded bg-brick px-6 py-3 text-sm font-medium text-cream transition hover:bg-brick/90 btn-arrow">
             Book a Discovery Call
         </a>
     </div>

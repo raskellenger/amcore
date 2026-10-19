@@ -18,10 +18,10 @@ Owners and operators of trades businesses in the Upstate, typically 5-50 people,
 
 ## The nine pages
 
-1. **Home** — hero, pain points, five value pillars, eight module tiles, how-it-works timeline, "built by people from the trades" strip, websites cross-sell, final CTA.
+1. **Home** — hero, pain points, five value pillars, eight module tiles, "built by people from the trades" strip, websites cross-sell, final CTA.
 2. **Operating Systems** — the eight modules in depth, offline/voice/QuickBooks callouts, what the monthly service includes.
 3. **Websites** — the secondary website-building service, simple process, request-a-quote CTA.
-4. **How We Work** — expanded delivery timeline, what AmCore needs from the client, training, ongoing support.
+4. **How We Work** — what AmCore needs from the client, training, ongoing support.
 5. **About** — trades background, Greenville focus, values (placeholder), founder bios and photos (placeholder).
 6. **FAQ** — 12 questions covering offline behavior, data ownership, business-continuity, security claims, pricing, scope, and trades served.
 7. **Contact / Book a Discovery Call** — the one interactive feature on the site: a validated, honeypot-protected, rate-limited form (built, live) that saves a `Lead` and queues a notification email.
@@ -41,7 +41,7 @@ No lead is ever exposed through a public URL. There is no way for a site visitor
 
 ## Brand
 
-Navy `#1F2A44`, brick red `#9B2C2C` (accent), bronze `#A07C3B` (rules/details only), warm off-white background, near-black text. Fraunces for headings, IBM Plex Sans for body (16px minimum). No gradients, emoji, or glassmorphism. Real trades imagery only — labeled placeholders until real photos exist.
+Charcoal `#292929` (primary), brick red `#A6372F` (accent), cream `#F3ECDD` (background), near-black text. Black, red, cream only. Fraunces for headings, IBM Plex Sans for body (16px minimum). No gradients, emoji, or glassmorphism. Real trades imagery only — labeled placeholders until real photos exist.
 
 ## Where things live
 

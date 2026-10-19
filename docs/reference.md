@@ -6,10 +6,9 @@ Quick-reference tables and the single consolidated placeholder list. Update this
 
 | Token | Value | Use |
 |---|---|---|
-| `--color-navy` | `#1F2A44` | Primary — headings, nav, footer background |
-| `--color-brick` | `#9B2C2C` | Accent — CTAs, links on hover |
-| `--color-bronze` | `#A07C3B` | Rules and small details only — never body text |
-| `--color-offwhite` | `#F7F4EE` | Page background |
+| `--color-charcoal` | `#292929` | Primary (black, matches the logo wordmark) — headings, footer background |
+| `--color-brick` | `#A6372F` | Accent (red, matches the logo) — CTAs, links on hover |
+| `--color-cream` | `#F3ECDD` | Page background |
 | `--color-ink` | near-black | Body text |
 | Heading font | Fraunces | Self-hosted via bunny fonts (Vite) |
 | Body font | IBM Plex Sans, 16px minimum | Self-hosted via bunny fonts (Vite) |
@@ -26,7 +25,7 @@ Defined in `resources/css/app.css` (`@theme` block) and mirrored in `CLAUDE.md`.
 
 | Placeholder | Where it shows up | Notes |
 |---|---|---|
-| Product name | Site-wide copy | Draft uses "the AmCore Operating System." Alternative offered: "AsPerPlan." Needs one final pick. |
+| Product name | Site-wide copy | **Decided:** "the AmCore Operating System." AsPerPlan is dropped. |
 | Values statement | About page | Not yet provided. |
 | Founder bios and photos | About page | Not yet provided — will never be AI-generated (real people). |
 | Approved uptime % and critical response time | Operating Systems, FAQ | Claims rules forbid any number until approved. |
@@ -46,7 +45,8 @@ Defined in `resources/css/app.css` (`@theme` block) and mirrored in `CLAUDE.md`.
 
 ## Brand assets received
 
-- `resources/brand-source/amcore-logo-navy-transparent.png` — final logo (navy wordmark, brick-red window, bronze rule), RGBA, in use in the nav/footer.
+- **Final logo (chosen 2026-10-12):** solid brick-red "A" with a white four-point star cut out, beside the AmCore wordmark (red "AM", charcoal "CORE"). Source: `resources/brand-source/amcore-logo-star-a-original.webp` (raster, 2464px). Transparent cutouts: `amcore-logo-final.png`, `amcore-mark-final.png`. In use: `public/images/brand/amcore-mark.png` + `amcore-wordmark.png` (nav and footer), favicons, and `og-image.png`, all cut from that raster. **Open item:** no vector (SVG) exists yet. Get a clean SVG before any print or truck use. Earlier shield-and-weave logo (`amcore-logo-final-original.webp`) and the navy house-and-windows files are superseded, kept for reference only.
+- `resources/brand-source/amcore-logo-navy-transparent.png` — superseded old logo (navy wordmark, brick-red window, bronze rule), RGBA, in use in the nav/footer.
 - `resources/brand-source/amcore-logo-navy-cream-bg.jpeg` — same design, flattened background, reference only.
 - `resources/brand-source/amcore-mark-alt-wave-concept.jpeg`, `amcore-wordmark-alt-gray-concept.jpeg` — earlier/alternate concepts, not in use. Flag if either of these was actually meant to be final.
 - Not yet accessible: `~/Documents/AmCore/Digital Assets/` (logo videos, "Logo Segments (Final).zip") — macOS blocked terminal read access; user is moving the folder into the repo.

@@ -9,11 +9,11 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
             fonts: [
-                bunny('IBM Plex Sans', {
-                    weights: [400, 500, 600, 700],
+                bunny('Archivo', {
+                    weights: [400, 500, 600],
                 }),
-                bunny('Fraunces', {
-                    weights: [500, 600, 700],
+                bunny('Space Mono', {
+                    weights: [400],
                 }),
             ],
         }),

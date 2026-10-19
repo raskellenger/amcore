@@ -20,3 +20,6 @@ yarn-error.log
 /.vscode
 /.zed
 /storage/pail
+
+# Local-only stock photo drafts. Never commit or deploy these.
+/public/images/stock-draft/

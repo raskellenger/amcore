@@ -46,7 +46,7 @@ Never say: "AmCore is SOC 2 compliant/certified", any compliance certification (
 Never publish prices. Use: "One setup fee. One monthly fee. No per-user fees." Every pricing mention links to "Book a discovery call."
 
 ### Brand
-Colors as Tailwind v4 theme tokens: navy `#1F2A44` (primary), brick red `#9B2C2C` (accent), bronze `#A07C3B` (rules/details only, never body text), warm off-white background, near-black text. Headings: Fraunces (serif). Body: IBM Plex Sans, minimum 16px. No gradients, emoji, or glassmorphism. Real trades imagery only (labeled placeholders until real photos exist) — no stock photos of people in suits at laptops.
+Colors as Tailwind v4 theme tokens: charcoal `#292929` (primary), brick red `#A6372F` (accent), cream `#F3ECDD` (background), near-black text `#191A1C`. Three colors only: black, red, cream. No navy, no bronze. Headings: Fraunces (serif). Body: IBM Plex Sans, minimum 16px. No gradients, emoji, or glassmorphism. Real trades imagery only (labeled placeholders until real photos exist) — no stock photos of people in suits at laptops.
 
 ## Where things are
 
