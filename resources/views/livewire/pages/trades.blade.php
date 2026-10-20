@@ -14,7 +14,7 @@ $trades = [
     ['id' => 'plumbing', 'name' => 'Plumbing', 'pain' => 'Service calls, callbacks, and T&M tickets scribbled on the back of a carbon copy.', 'fix' => 'Work orders go to the phone, parts and hours get logged on the job, and the invoice is ready when the truck pulls out.'],
     ['id' => 'hvac', 'name' => 'HVAC', 'pain' => 'Install schedules, service agreements, and seasonal rush all living in different places.', 'fix' => 'One schedule for installs and service calls, equipment tracked by job, and customer history a tap away before you knock.'],
     ['id' => 'electrical', 'name' => 'Electrical', 'pain' => 'Change orders and extra materials that never make it onto the bill.', 'fix' => 'Proposals, change orders, and job costing in one place, so the extras get billed and you see which jobs made money.'],
-    ['id' => 'painting-drywall', 'name' => 'Painting & Drywall', 'pain' => 'Crews on several sites, punch lists in texts, and nobody sure what was promised.', 'fix' => "Each crew sees its assigned jobs and scope. Notes and updates stay on the work order instead of in someone's phone.", 'position' => 'center 20%'],
+    ['id' => 'painting-drywall', 'name' => 'Painting & Drywall', 'pain' => 'Crews on several sites, punch lists in texts, and nobody sure what was promised.', 'fix' => "Each crew sees its assigned jobs and scope. Notes and updates stay on the work order instead of in someone's phone.", 'position' => 'center 63%'],
     ['id' => 'roofing', 'name' => 'Roofing', 'pain' => 'Weather moves the schedule, and every move means a round of calls and texts.', 'fix' => 'Reschedule once and everyone on the job gets the change. Estimates and invoices follow the same work order.'],
 ];
 @endphp
