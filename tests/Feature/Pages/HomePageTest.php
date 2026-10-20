@@ -18,15 +18,17 @@ test('the home page shows the hero, pain points, pillars, and modules', function
     $response->assertSee('See Websites');
 });
 
-test('the home hero is the puzzle, not a stock photo, and names the Upstate', function (): void {
+test('the home hero is the workflow map, not a stock photo, and names the Upstate', function (): void {
     $response = $this->get('/');
 
     $response->assertSee('Upstate, South Carolina');
-    $response->assertSee('Napkin estimate');
+    $response->assertSee('New Customer or New Lead');
+    $response->assertSee('Final Invoice Paid, 5-Star Review Completed');
     $response->assertSee("I'm on a pile of apps", false);
     $response->assertSee("I'm on paper", false);
     $response->assertDontSee('Greenville, SC · Built for the trades');
     $response->assertDontSee('home-hero');
+    $response->assertDontSee('Napkin estimate');
 });
 
 test('the problem section covers hopping between systems and shared passwords', function (): void {
