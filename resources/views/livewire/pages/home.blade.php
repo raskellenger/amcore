@@ -24,18 +24,8 @@ $modules = [
 @endphp
 
 <div>
-    {{-- Hero: the puzzle. Loose pieces lock into one system. No stock photo. --}}
-    <section class="border-b border-steel" x-data="{
-        solved: false,
-        tiles: [
-            { mess: 'Napkin estimate', system: 'Estimates', r: -8, tx: -14, ty: 12 },
-            { mess: 'Who is on the job?', system: 'Work orders', r: 7, tx: 16, ty: -10 },
-            { mess: 'Invoice not sent', system: 'Invoicing', r: -6, tx: 10, ty: 14 },
-            { mess: 'Parts in a text', system: 'Inventory', r: 11, tx: -18, ty: -8 },
-            { mess: 'Whiteboard schedule', system: 'Scheduling', r: -12, tx: 8, ty: 12 },
-            { mess: 'Did it make money?', system: 'Job costing', r: 6, tx: -10, ty: -16 },
-        ]
-    }">
+    {{-- Hero: the workflow map. New lead to five-star review, tracked the whole way. No stock photo. --}}
+    <section class="border-b border-steel">
         <div class="mx-auto grid w-full max-w-[1200px] items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:py-24">
             <div>
                 <span class="eyebrow">Upstate, South Carolina · Built for the trades</span>
@@ -67,25 +57,22 @@ $modules = [
             <div>
                 <div class="overflow-hidden rounded bg-carbon p-4 sm:p-6">
                     <div class="flex flex-wrap items-baseline justify-between gap-2">
-                        <p class="font-heading text-lg font-medium text-cream" x-text="solved ? 'AmCore' : 'Loose pieces'">Loose pieces</p>
-                        <p class="text-slate" x-text="solved ? 'One system. You run the business.' : 'Not a system yet.'">Not a system yet.</p>
+                        <p class="font-heading text-lg font-medium text-cream">The workflow</p>
+                        <p class="text-slate">Tracked start to finish.</p>
                     </div>
-                    <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3"
-                        :class="solved ? 'rounded border-2 border-steel bg-graphite p-2' : ''">
-                        <template x-for="(t, i) in tiles" :key="t.system">
-                            <div class="relative z-0 flex min-h-28 items-center justify-center rounded border border-brick/40 bg-graphite px-3 py-4 text-center text-base font-semibold leading-tight text-cream transition-all duration-700 ease-out motion-reduce:transition-none"
-                                :class="solved ? '!z-10 !border-steel' : ''"
-                                :style="`transform: rotate(${solved ? 0 : t.r}deg) translate(${solved ? 0 : t.tx}px, ${solved ? 0 : t.ty}px); transition-delay:${solved ? i * 50 : 0}ms`">
-                                <span class="transition-opacity duration-300" :class="solved ? 'opacity-0' : 'opacity-100'" x-text="t.mess"></span>
-                                <span class="absolute inset-0 flex items-center justify-center px-3 text-center transition-opacity duration-500" :class="solved ? 'opacity-100' : 'opacity-0'" x-text="t.system"></span>
-                            </div>
-                        </template>
+                    <div class="mt-6 flex flex-col items-center py-2">
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <span class="icon-chip"><flux:icon name="map-pin" class="size-5" aria-hidden="true" /></span>
+                            <p class="font-heading text-base font-medium text-cream">New Customer or New Lead</p>
+                        </div>
+                        <div class="my-4 h-20 border-l-2 border-dashed border-brick/70" aria-hidden="true"></div>
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <span class="icon-chip"><flux:icon name="map-pin" class="size-5" aria-hidden="true" /></span>
+                            <p class="font-heading text-base font-medium text-cream">Final Invoice Paid, 5-Star Review Completed</p>
+                        </div>
                     </div>
                 </div>
-                <p class="mt-4 text-cream/80" aria-live="polite" x-text="solved ? 'The pieces are AmCore. The crew does the job. You see the business.' : 'Six things only you are holding.'">Six things only you are holding.</p>
-                <button type="button" @click="solved = !solved"
-                    class="mt-3 rounded bg-brick px-5 py-3 text-base font-semibold text-cream hover:bg-brick/90"
-                    x-text="solved ? 'Start over' : 'Put it together'">Put it together</button>
+                <p class="mt-4 text-cream/80">We track every job in the workflow, start to finish — specific to how your business runs, not somebody else's process.</p>
             </div>
         </div>
     </section>
