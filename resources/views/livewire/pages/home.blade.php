@@ -165,7 +165,7 @@ $modules = [
 
     {{-- Trades strip --}}
     <section class="mx-auto max-w-[1200px] px-6 pt-20">
-        <x-photo name="home-trades" ratio="21/9" position="center 68%" label="A plumber working: wrenches, a water heater, the real job" alt="A plumber tightening a fitting on a water heater with two wrenches" />
+        <x-photo name="home-trades" ratio="21/9" position="center 45%" label="A plumber working: new construction, the real job" alt="A plumber drilling into an overhead pipe fitting in a building under construction" />
     </section>
     <section class="mx-auto max-w-3xl px-6 py-20 text-center">
         <span class="eyebrow mb-4">Who we are</span>
