@@ -44,7 +44,7 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
     <section class="border-b border-steel bg-carbon">
         <div class="mx-auto max-w-5xl px-6 py-20">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                <h2 class="font-heading text-2xl font-medium text-cream sm:text-h2">Every job follows your steps.<br>None get skipped.</h2>
+                <h2 class="font-heading text-2xl font-medium text-cream sm:text-h2">Every job follows your steps.<br>Nothing gets skipped.</h2>
                 <p class="max-w-sm text-slate">You decide the steps a job goes through. The system won't let it move ahead until each one is done, so nothing gets invoiced half-finished.</p>
             </div>
 
@@ -60,43 +60,41 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
                         ['check-circle', 'Paid'],
                         ['star', 'Review'],
                     ] as [$icon, $label])
-                        <div class="flex flex-col items-center gap-2 text-center">
+                        <div class="hover-card flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-center">
                             <span class="icon-chip"><flux:icon :name="$icon" class="size-5" aria-hidden="true" /></span>
                             <span class="text-xs leading-tight text-slate">{{ $label }}</span>
                         </div>
                     @endforeach
                 </div>
 
-                {{-- Swap demo: a few alternate steps, each aligned under the slot it could replace,
-                     to show steps aren't fixed — you choose what goes where. Desktop only, since the
-                     column alignment only holds at the 8-across breakpoint. --}}
-                <div class="mt-6 hidden lg:grid lg:grid-cols-8 lg:gap-x-4">
-                    <div class="col-start-3 flex justify-center">
-                        <flux:icon name="chevron-up" class="size-5 text-brick" aria-hidden="true" />
-                    </div>
-                    <div class="col-start-5 flex justify-center">
-                        <flux:icon name="chevron-up" class="size-5 text-brick" aria-hidden="true" />
-                    </div>
-                    <div class="col-start-7 flex justify-center">
-                        <flux:icon name="chevron-up" class="size-5 text-brick" aria-hidden="true" />
-                    </div>
-                </div>
-                <div class="mt-2 hidden lg:grid lg:grid-cols-8 lg:gap-x-4">
-                    <div class="col-start-3 flex flex-col items-center gap-2 text-center">
-                        <span class="icon-chip"><flux:icon name="document-check" class="size-5" aria-hidden="true" /></span>
-                        <span class="text-xs leading-tight text-slate">Permit pulled</span>
-                    </div>
-                    <div class="col-start-5 flex flex-col items-center gap-2 text-center">
-                        <span class="icon-chip"><flux:icon name="cube" class="size-5" aria-hidden="true" /></span>
-                        <span class="text-xs leading-tight text-slate">Parts ordered</span>
-                    </div>
-                    <div class="col-start-7 flex flex-col items-center gap-2 text-center">
-                        <span class="icon-chip"><flux:icon name="shield-check" class="size-5" aria-hidden="true" /></span>
-                        <span class="text-xs leading-tight text-slate">Warranty follow-up</span>
-                    </div>
+                {{-- A second full row of swappable alternates — same grid, so it always stays
+                     completely filled regardless of breakpoint. Shows steps aren't fixed. --}}
+                <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-8">
+                    @foreach ([
+                        ['chat-bubble-left-right', 'Text lead'],
+                        ['document-check', 'Permit pulled'],
+                        ['cube', 'Parts ordered'],
+                        ['wrench', 'Equipment check'],
+                        ['shield-check', 'Safety check'],
+                        ['banknotes', 'Deposit collected'],
+                        ['bell', 'Reminder sent'],
+                        ['arrow-path', 'Reschedule'],
+                    ] as [$icon, $label])
+                        <div class="hover-card flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-center">
+                            <span class="icon-chip"><flux:icon :name="$icon" class="size-5" aria-hidden="true" /></span>
+                            <span class="text-xs leading-tight text-slate">{{ $label }}</span>
+                        </div>
+                    @endforeach
                 </div>
 
-                <p class="mt-8 text-sm text-slate">One example. Your steps, your order. Swap any step for one that fits your shop.</p>
+                {{-- Every step, from both rows, flows into one system. --}}
+                <div class="mt-8 flex flex-col items-center gap-2">
+                    <div class="h-8 w-px bg-steel"></div>
+                    <span class="icon-chip size-14"><flux:icon name="cpu-chip" class="size-6" aria-hidden="true" /></span>
+                    <span class="font-heading text-sm font-semibold text-cream">Your system</span>
+                </div>
+
+                <p class="mt-8 text-center text-sm text-slate">Your steps, your order. Swap any step for one that fits your shop.</p>
             </div>
             <p class="mt-4 text-slate">Hours and parts are logged while the work happens, so you know what a job cost before you send the bill.</p>
         </div>
@@ -177,13 +175,10 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
          spans full width, matching Figma's "Support reason" full-width band. --}}
     <section class="border-y border-steel bg-cream">
         <div class="mx-auto max-w-5xl px-6 py-20">
-            <div class="flex items-end justify-between">
-                <h2 class="font-heading text-2xl font-medium text-ink sm:text-h2">Five reasons this is different</h2>
-                <p class="mono hidden text-xs uppercase text-muted sm:block">Built around your business</p>
-            </div>
+            <h2 class="font-heading text-2xl font-medium text-ink sm:text-h2">Five reasons this is different</h2>
             <ol class="mt-8 grid gap-6 sm:grid-cols-2">
                 @foreach ([
-                    ['stop', 'Built around your shop.', 'Your forms, your words, your process. We build the system to fit how you work, not a template you have to work around.'],
+                    ['building-office-2', 'Built around your shop.', 'Your forms, your words, your process. We build the system to fit how you work, not a template you have to work around.'],
                     ['adjustments-horizontal', 'Built for the field.', 'Phone-first, so techs can see the job, log hours and parts, and take photos from the truck.'],
                     ['shield-check', "Jobs can't close half-done.", 'Required photos, signatures, and steps are checked before anything gets invoiced.'],
                     ['map-pin', 'Local, not faceless.', 'Based in Greenville. Discovery and training happen in person, at your shop.'],
@@ -220,7 +215,7 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
             <p class="mt-3 max-w-2xl text-slate">Start with what your shop needs now. Add more as you grow, or have us build something that doesn't exist yet.</p>
             <div class="mt-8 grid gap-6 sm:grid-cols-2">
                 @foreach ([
-                    ['stop', 'Get the work', 'Answer faster and close the job in the driveway.', ['Intake & customer records', 'Proposals & estimating', 'Customer texting']],
+                    ['handshake', 'Get the work', 'Answer faster and close the job in the driveway.', ['Intake & customer records', 'Proposals & estimating', 'Customer texting']],
                     ['truck', 'Do the work', 'Crews know the job before they pull up.', ['Work orders with required steps', 'Scheduling & dispatch', 'Parts, inventory & equipment', 'Recurring service & reminders']],
                     ['receipt-percent', 'Get paid', "Bills go out the day the job's done.", ['Invoicing, synced to QuickBooks', 'Customer portals', 'Time & pay, including after-hours rules', 'Supplier portal connections']],
                     ['chart-bar', 'Know your numbers', 'See which jobs make money while they\'re still running.', ['Live job costing', 'Reporting', 'Team records & certifications', 'AI help with notes and transcription']],
@@ -243,7 +238,7 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
                     </div>
                 @endforeach
             </div>
-            <p class="mt-6 text-sm text-slate">Don't see it? If your shop does it, we can build it.</p>
+            <p class="mt-8 text-center text-xl font-semibold text-brick">Don't see it? If your shop does it, we can build it.</p>
         </div>
     </section>
 
@@ -276,7 +271,7 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
     {{-- Trades strip + Who we are: direct analog of Figma's dark "Who we are" photo+text section. --}}
     <section class="bg-carbon pt-20">
         <div class="mx-auto max-w-[1200px] px-6">
-            <x-photo name="home-trades" ratio="21/9" position="center 45%" label="A plumber working: new construction, the real job" alt="A plumber drilling into an overhead pipe fitting in a building under construction" class="rounded-xl shadow-card-dark" />
+            <x-photo name="about-shop" ratio="21/9" position="center 30%" label="The AmCore team" alt="The AmCore team" class="rounded-xl shadow-card-dark" />
         </div>
     </section>
     <section class="bg-carbon">
@@ -306,17 +301,39 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
     <section class="bg-carbon">
         <div class="mx-auto max-w-5xl px-6 py-20">
             <h2 class="font-heading text-2xl font-medium text-cream sm:text-h2">From first visit to go-live in weeks, not months.</h2>
-            <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ([
+            @php
+                $goLiveSteps = [
                     ['Discovery', 'We spend time at your shop learning how the work actually moves.'],
                     ['Build', 'We build your system and bring over your customer and job history.'],
                     ['Test', 'Your crew runs it on real jobs, and we fix whatever doesn\'t fit.'],
                     ['Go live', 'We train your team in person and stay on priority support for the first 30 days.'],
-                ] as $i => [$title, $body])
+                ];
+            @endphp
+
+            {{-- Phone view: number badge on the side of each step, with a connecting line down to the next. --}}
+            <div class="mt-10 space-y-6 sm:hidden">
+                @foreach ($goLiveSteps as $i => [$title, $body])
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="icon-chip size-10 shrink-0 font-heading text-sm font-semibold">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                            @unless ($i === array_key_last($goLiveSteps))
+                                <span class="mt-2 w-px flex-1 bg-steel"></span>
+                            @endunless
+                        </div>
+                        <div class="pb-2">
+                            <h3 class="font-heading text-h4 text-cream">{{ $title }}</h3>
+                            <p class="mt-2 text-cream/80">{{ $body }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-10 hidden gap-8 sm:grid sm:grid-cols-2 lg:grid-cols-4">
+                @foreach ($goLiveSteps as $i => [$title, $body])
                     <div>
                         <div class="flex items-center gap-3">
                             <span class="icon-chip size-10 shrink-0 font-heading text-sm font-semibold">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</span>
-                            @unless ($i === 3)
+                            @unless ($i === array_key_last($goLiveSteps))
                                 <hr class="hidden flex-1 border-steel sm:block">
                             @endunless
                         </div>
@@ -347,7 +364,6 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
                             'Daily off-site backups',
                             'Two hours of changes',
                             'Support from a real person',
-                            'Renewal increases capped at 7%',
                         ] as $item)
                             <li class="flex items-start gap-2">
                                 <flux:icon name="check-circle" class="mt-0.5 size-4 shrink-0 text-brick" aria-hidden="true" />
@@ -365,7 +381,7 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
     {{-- Websites cross-sell: no direct Figma analog on this homepage — dark, continuing the zigzag. --}}
     <section class="border-y border-steel bg-carbon">
         <div class="mx-auto flex max-w-4xl flex-col items-center gap-4 px-6 py-14 text-center">
-            <h2 class="font-heading text-xl font-medium text-cream">Need a website too?</h2>
+            <h2 class="font-heading text-xl font-medium text-cream">For every OS a complementary landing page is included.</h2>
             <p class="text-slate">We also build fast, mobile-first sites for trades businesses, built to get the phone to ring.</p>
             <a href="{{ route('websites') }}" wire:navigate class="font-medium text-brick hover:underline">See Websites &rarr;</a>
         </div>

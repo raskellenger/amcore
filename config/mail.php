@@ -6,15 +6,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Discovery Request Recipient
+    | Discovery Request Recipients
     |--------------------------------------------------------------------------
     |
-    | Where contact-form notification emails are sent. [PLACEHOLDER] until
-    | AmCore confirms the real inbox that should receive discovery requests.
+    | Every address in this comma-separated list gets the discovery-request
+    | notification email. [PLACEHOLDER] until AmCore confirms the full team
+    | distribution list — alexander@amcoresystems.com is the one confirmed
+    | address so far.
     |
     */
 
-    'discovery_request_recipient' => env('MAIL_DISCOVERY_REQUEST_RECIPIENT', 'discovery-requests@amcoresystems.com'),
+    'discovery_request_recipients' => array_filter(array_map(
+        trim(...),
+        explode(',', env('MAIL_DISCOVERY_REQUEST_RECIPIENTS', 'alexander@amcoresystems.com')),
+    )),
 
     /*
     |--------------------------------------------------------------------------

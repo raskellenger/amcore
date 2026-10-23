@@ -20,7 +20,6 @@ state([
     'headache' => '',
     'preferred_contact_method' => '',
     'website' => '',
-    'submitted' => false,
     'rateLimited' => false,
     'rateLimitedForSeconds' => 0,
 ]);
@@ -42,7 +41,8 @@ $submit = function () {
     }
 
     $this->reset(['name', 'company', 'trade', 'crew_size', 'phone', 'email', 'headache', 'preferred_contact_method', 'website']);
-    $this->submitted = true;
+
+    $this->redirect(route('how-we-work'), navigate: true);
 };
 
 ?>
@@ -54,12 +54,6 @@ $submit = function () {
         Tell us a bit about your business, and we'll set up a time to talk — in person, at your shop, if you're in the Upstate.
     </p>
 
-    @if ($submitted)
-        <div wire:key="success" role="status" class="mt-10 rounded-lg border border-steel bg-graphite p-6 text-center shadow-card-dark">
-            <p class="font-heading text-lg font-medium text-cream">Got it.</p>
-            <p class="mt-2 text-slate">We'll reach out within <span class="text-slate">[PLACEHOLDER: response time]</span> to schedule your discovery call.</p>
-        </div>
-    @else
         <form wire:submit="submit" class="mt-10 space-y-5" wire:key="form">
             <p class="text-sm text-slate"><span class="text-signal" aria-hidden="true">*</span> Required</p>
 
@@ -164,7 +158,6 @@ $submit = function () {
                 <span wire:loading wire:target="submit">Sending...</span>
             </button>
         </form>
-    @endif
 
     <div class="mt-14 border-t border-steel pt-8 text-sm text-slate">
         <p>

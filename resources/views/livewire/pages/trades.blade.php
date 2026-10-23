@@ -25,6 +25,8 @@ $trades = [
         Every trade has its own words and its own paperwork. We configure the system to yours. Not sure yours is listed? <a href="{{ route('contact') }}" wire:navigate class="font-medium text-brick hover:underline">Ask us.</a>
     </p>
 
+    <x-photo name="trades-intro" ratio="21/9" position="center 35%" label="Planning the system" alt="A hand sketching a workflow diagram on a whiteboard" class="mt-8 rounded-xl shadow-card-dark" />
+
     <nav aria-label="Trades" class="mt-8 flex flex-wrap gap-2 text-sm font-medium">
         @foreach ($trades as $trade)
             <a href="#{{ $trade['id'] }}" class="rounded-full border border-steel px-3 py-1.5 text-cream hover:border-brick hover:text-brick">{{ $trade['name'] }}</a>
@@ -43,6 +45,8 @@ $trades = [
             </section>
         @endforeach
     </div>
+
+    <p class="mt-8 text-center text-xl text-slate">Plumbing, HVAC, electrical, painting &amp; drywall, roofing — <span class="font-display text-3xl font-bold text-brick">and more</span>.</p>
 
     <div class="mt-14 text-center">
         <a href="{{ route('contact') }}" wire:navigate

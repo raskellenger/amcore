@@ -26,9 +26,7 @@ test('a visitor can submit the discovery request form', function (): void {
     $component = fillValidContactForm(Volt::test('pages.contact'));
     $component->call('submit');
 
-    $component->assertSet('submitted', true);
-    $component->assertSee('Got it.');
-    $component->assertSee('role="status"', false);
+    $component->assertRedirect(route('how-we-work'));
 
     $this->assertDatabaseHas('leads', ['email' => 'jim@carterplumbing.test']);
     Bus::assertDispatched(
@@ -74,7 +72,7 @@ test('a honeypot submission shows success without creating a lead', function ():
 
     $component->call('submit');
 
-    $component->assertSet('submitted', true);
+    $component->assertRedirect(route('how-we-work'));
     $this->assertDatabaseCount('leads', 0);
 });
 
@@ -102,7 +100,6 @@ test('it rate limits repeated submissions and shows a message instead of a 500',
         ->call('submit');
 
     $component->assertSet('rateLimited', true);
-    $component->assertSet('submitted', false);
     $component->assertSee('Too many discovery call requests');
 
     $secondsRemaining = $component->get('rateLimitedForSeconds');

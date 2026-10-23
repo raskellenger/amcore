@@ -1,0 +1,16 @@
+@blaze(fold: true)
+
+{{-- Credit: Phosphor Icons (https://phosphoricons.com), MIT licensed. Not part of Heroicons — Heroicons has no handshake glyph. --}}
+
+@php
+$classes = Flux::classes('shrink-0')->add('[:where(&)]:size-6');
+@endphp
+
+<svg {{ $attributes->class($classes) }} data-flux-icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-slot="icon">
+  <polyline points="200 152 160 192 96 176 40 136"/>
+  <polyline points="72.68 70.63 128 56 183.32 70.63"/>
+  <path d="M34.37,60.42,8.85,111.48a8,8,0,0,0,3.57,10.73L40,136,72.68,70.63,45.11,56.85A8,8,0,0,0,34.37,60.42Z"/>
+  <path d="M216,136l27.58-13.79a8,8,0,0,0,3.57-10.73L221.63,60.42a8,8,0,0,0-10.74-3.57L183.32,70.63Z"/>
+  <path d="M184,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120l40,32,16-16"/>
+  <polyline points="124.06 216 82.34 205.57 56 186.75"/>
+</svg>

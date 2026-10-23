@@ -38,9 +38,12 @@ view()->share('description', 'AmCore Systems is a Greenville, SC company buildin
     </p>
     <div class="mt-6 grid max-w-md grid-cols-2 gap-4">
         <div>
-            <x-photo name="about-founder-1" ratio="4/5" label="Founder portrait: real person only" alt="David" />
+            <x-photo name="about-founder-1" ratio="4/5" label="Founder portrait: real person only" alt="Alexander" />
+            <p class="mt-2 text-center text-sm font-medium text-cream">Alexander</p>
+        </div>
+        <div>
+            <x-photo name="about-founder-2" ratio="4/5" label="Founder portrait: real person only" alt="David" />
             <p class="mt-2 text-center text-sm font-medium text-cream">David</p>
         </div>
-        <x-photo name="about-founder-2" ratio="4/5" label="Founder portrait: real person only" />
     </div>
 </div>

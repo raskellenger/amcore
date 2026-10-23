@@ -21,7 +21,7 @@ class SendDiscoveryRequestNotification implements ShouldQueue
 
     public function handle(Lead $lead): void
     {
-        Mail::to(config('mail.discovery_request_recipient'))
+        Mail::to(config('mail.discovery_request_recipients'))
             ->send(new DiscoveryRequestReceived($lead));
 
         $this->logger->info('Discovery request notification sent.', ['lead_id' => $lead->id]);

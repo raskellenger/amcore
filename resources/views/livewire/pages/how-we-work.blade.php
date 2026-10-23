@@ -17,11 +17,7 @@ view()->share('description', "How AmCore works with you: discovery at your shop,
     <h1 class="font-display text-4xl leading-tight text-cream sm:text-h1-cta">How We Work</h1>
     <p class="mt-4 text-lg text-slate">In person, at your shop, with the people who do the work.</p>
 
-    <div class="mt-10 grid gap-4 sm:grid-cols-3">
-        <x-photo name="how-discovery" ratio="3/2" label="Discovery at the shop" alt="A technician inspecting equipment" />
-        <x-photo name="how-training" ratio="3/2" position="center 20%" label="In-person training" alt="A worker holding a wrench" />
-        <x-photo name="how-field" ratio="3/2" position="center 55%" label="Crew on a live job" alt="A crew working on scaffolding" />
-    </div>
+    <x-photo name="how-system" ratio="21/9" position="center" label="HVAC ductwork and plumbing lines on one building" alt="HVAC ductwork and copper plumbing lines running together on a building exterior" class="mt-10 rounded-xl shadow-card-dark" />
 
 
     <h2 class="mt-14 font-heading text-h4 text-cream">The stages</h2>

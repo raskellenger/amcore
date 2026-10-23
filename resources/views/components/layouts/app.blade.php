@@ -71,10 +71,12 @@
                 </nav>
 
                 <div class="flex items-center gap-3">
-                    <a href="{{ route('contact') }}" wire:navigate
-                        class="hidden h-14 shrink-0 items-center justify-center rounded-full bg-brick btn-arrow px-6 text-sm font-semibold text-cream transition hover:bg-brick/90 sm:inline-flex">
-                        Book a Discovery Call
-                    </a>
+                    @unless (request()->routeIs('contact'))
+                        <a href="{{ route('contact') }}" wire:navigate
+                            class="hidden h-14 shrink-0 items-center justify-center rounded-full bg-brick btn-arrow px-6 text-sm font-semibold text-cream transition hover:bg-brick/90 sm:inline-flex">
+                            Book a Discovery Call
+                        </a>
+                    @endunless
 
                     <button type="button" @click="mobileMenuOpen = !mobileMenuOpen" aria-controls="mobile-menu"
                         :aria-expanded="mobileMenuOpen" aria-label="Toggle menu" class="rounded p-2 text-ink hover:bg-ink/5 lg:hidden">
@@ -92,10 +94,12 @@
                 <a href="{{ route('how-we-work') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>How We Work</a>
                 <a href="{{ route('about') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>About</a>
                 <a href="{{ route('faq') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>FAQ</a>
-                <a href="{{ route('contact') }}" @click="mobileMenuOpen = false" wire:navigate
-                    class="mt-2 inline-flex h-14 items-center justify-center rounded-full bg-brick px-6 font-semibold text-cream sm:hidden">
-                    Book a Discovery Call
-                </a>
+                @unless (request()->routeIs('contact'))
+                    <a href="{{ route('contact') }}" @click="mobileMenuOpen = false" wire:navigate
+                        class="mt-2 inline-flex h-14 items-center justify-center rounded-full bg-brick px-6 font-semibold text-cream sm:hidden">
+                        Book a Discovery Call
+                    </a>
+                @endunless
             </nav>
         </div>
     </header>
@@ -118,6 +122,19 @@
                     We also build fast, mobile-first websites for trades businesses.
                 </p>
                 <a href="{{ route('websites') }}" wire:navigate class="mt-2 inline-block text-sm font-medium text-brick hover:underline">See Websites &rarr;</a>
+
+                {{-- Social links — placeholder hrefs until the real profile URLs exist. --}}
+                <div class="mt-6 flex items-center gap-4">
+                    <a href="#" aria-label="AmCore Systems on Facebook" class="text-ink/60 hover:text-brick">
+                        <flux:icon name="brand-facebook" class="size-5" aria-hidden="true" />
+                    </a>
+                    <a href="#" aria-label="AmCore Systems on LinkedIn" class="text-ink/60 hover:text-brick">
+                        <flux:icon name="brand-linkedin" class="size-5" aria-hidden="true" />
+                    </a>
+                    <a href="#" aria-label="AmCore Systems on X" class="text-ink/60 hover:text-brick">
+                        <flux:icon name="brand-x" class="size-5" aria-hidden="true" />
+                    </a>
+                </div>
             </div>
 
             <div>
@@ -148,7 +165,7 @@
     </footer>
 
     {{-- Mobile action bar: click-to-call appears once AMCORE_PHONE is set. Hidden on the internal whiteboard so it does not cover the add button. --}}
-    @unless (request()->routeIs('whiteboard'))
+    @unless (request()->routeIs('whiteboard', 'contact'))
     <div class="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-steel bg-carbon p-2 sm:hidden">
         @if (config('amcore.phone'))
             <a href="tel:{{ config('amcore.phone') }}" class="inline-flex flex-1 items-center justify-center rounded-full border border-steel bg-graphite px-4 py-3 text-sm font-medium text-cream">Call</a>
