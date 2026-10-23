@@ -49,49 +49,50 @@ view()->share('description', 'Operating systems for the trades: work orders, sch
             </div>
 
             <div class="mt-10 rounded-xl bg-graphite p-8 shadow-card-dark sm:p-10">
-                <div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-8">
-                    @foreach ([
-                        ['phone-arrow-down-left', 'Call comes in'],
-                        ['clipboard-document-list', 'Work order'],
-                        ['truck', 'Dispatch'],
-                        ['map-pin', 'On site'],
-                        ['camera', 'Photos & signature'],
-                        ['receipt-percent', 'Invoice'],
-                        ['check-circle', 'Paid'],
-                        ['star', 'Review'],
-                    ] as [$icon, $label])
-                        <div class="hover-card flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-center">
-                            <span class="icon-chip"><flux:icon :name="$icon" class="size-5" aria-hidden="true" /></span>
-                            <span class="text-xs leading-tight text-slate">{{ $label }}</span>
-                        </div>
-                    @endforeach
-                </div>
+                <div class="group/flow relative">
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-8">
+                        @foreach ([
+                            ['phone-arrow-down-left', 'Call comes in'],
+                            ['clipboard-document-list', 'Work order'],
+                            ['truck', 'Dispatch'],
+                            ['map-pin', 'On site'],
+                            ['camera', 'Photos & signature'],
+                            ['receipt-percent', 'Invoice'],
+                            ['check-circle', 'Paid'],
+                            ['star', 'Review'],
+                        ] as [$icon, $label])
+                            <div class="hover-card flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-center transition-opacity duration-300 group-hover/flow:opacity-0">
+                                <span class="icon-chip"><flux:icon :name="$icon" class="size-5" aria-hidden="true" /></span>
+                                <span class="text-xs leading-tight text-slate">{{ $label }}</span>
+                            </div>
+                        @endforeach
+                    </div>
 
-                {{-- A second full row of swappable alternates — same grid, so it always stays
-                     completely filled regardless of breakpoint. Shows steps aren't fixed. --}}
-                <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-8">
-                    @foreach ([
-                        ['chat-bubble-left-right', 'Text lead'],
-                        ['document-check', 'Permit pulled'],
-                        ['cube', 'Parts ordered'],
-                        ['wrench', 'Equipment check'],
-                        ['shield-check', 'Safety check'],
-                        ['banknotes', 'Deposit collected'],
-                        ['bell', 'Reminder sent'],
-                        ['arrow-path', 'Reschedule'],
-                    ] as [$icon, $label])
-                        <div class="hover-card flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-center">
-                            <span class="icon-chip"><flux:icon :name="$icon" class="size-5" aria-hidden="true" /></span>
-                            <span class="text-xs leading-tight text-slate">{{ $label }}</span>
-                        </div>
-                    @endforeach
-                </div>
+                    {{-- A second full row of swappable alternates — same grid, so it always stays
+                         completely filled regardless of breakpoint. Shows steps aren't fixed. --}}
+                    <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-8">
+                        @foreach ([
+                            ['chat-bubble-left-right', 'Text lead'],
+                            ['document-check', 'Permit pulled'],
+                            ['cube', 'Parts ordered'],
+                            ['wrench', 'Equipment check'],
+                            ['shield-check', 'Safety check'],
+                            ['banknotes', 'Deposit collected'],
+                            ['bell', 'Reminder sent'],
+                            ['arrow-path', 'Reschedule'],
+                        ] as [$icon, $label])
+                            <div class="hover-card flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-center transition-opacity duration-300 group-hover/flow:opacity-0">
+                                <span class="icon-chip"><flux:icon :name="$icon" class="size-5" aria-hidden="true" /></span>
+                                <span class="text-xs leading-tight text-slate">{{ $label }}</span>
+                            </div>
+                        @endforeach
+                    </div>
 
-                {{-- Every step, from both rows, flows into one system. --}}
-                <div class="mt-8 flex flex-col items-center gap-2">
-                    <div class="h-8 w-px bg-steel"></div>
-                    <span class="icon-chip size-14"><flux:icon name="cpu-chip" class="size-6" aria-hidden="true" /></span>
-                    <span class="font-heading text-sm font-semibold text-cream">Your system</span>
+                    {{-- Hidden until you hover any step — then every step disappears and flows into one system. --}}
+                    <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover/flow:opacity-100">
+                        <span class="icon-chip size-14"><flux:icon name="cpu-chip" class="size-6" aria-hidden="true" /></span>
+                        <span class="font-heading text-sm font-semibold text-cream">Your system</span>
+                    </div>
                 </div>
 
                 <p class="mt-8 text-center text-sm text-slate">Your steps, your order. Swap any step for one that fits your shop.</p>
