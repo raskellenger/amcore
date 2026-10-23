@@ -20,7 +20,7 @@
     $src = $real ?? $stock;
 @endphp
 
-<figure {{ $attributes->class([$fill ? '' : 'relative', 'overflow-hidden rounded border border-steel bg-graphite']) }} @unless ($fill) style="aspect-ratio: {{ $ratio }}" @endunless>
+<figure {{ $attributes->class([$fill ? '' : 'relative', 'overflow-hidden rounded-xl border border-steel bg-graphite']) }} @unless ($fill) style="aspect-ratio: {{ $ratio }}" @endunless>
     @if ($src)
         <img src="{{ asset($src) }}" alt="{{ $alt }}" loading="lazy" class="size-full object-cover" style="object-position: {{ $position }}">
         @if ($stock)

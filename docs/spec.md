@@ -89,5 +89,5 @@ Before the first production deploy: configure `Illuminate\Http\Middleware\TrustP
 ## Known gaps / not yet built
 
 - Case Studies real content — intentionally deferred until a client approves sharing their story.
-- GitHub remote, domain, Sentry DSN, SES verified identity, Laravel Cloud — all placeholders, see `docs/reference.md`.
+- GitHub remote, Sentry DSN, SES verified identity, Laravel Cloud — all still placeholders, see `docs/reference.md`. Domain (`amcoresystems.com`) is registered but parked, not yet pointed at a host.
 - Real photography to replace the generator-prompt placeholders (hero, trades strip, etc.) — no images are embedded on any page yet, only copy.

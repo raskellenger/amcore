@@ -36,6 +36,7 @@ Lanes: Claude = code/copy structure. Grok = art/visuals. David + Alexander = dec
 
 ## Ideas: David / Alexander
 (Write on the board. Real-world stuff we'd never think of goes here.)
+- Alexander: Updated the no-stock-photo rule — real (non-CGI) free-licensed stock photos are now OK as local-only drafts for layout/copy review (via the existing `stock-draft/` mechanism, git-ignored, never ships). Swap for real AmCore photography before production. Founder portraits and the `websites-example` shot stay placeholders — no stand-ins for real people or real client results.
 
 ## Next up
 - [ ] Review /hero-lab and /logo-lab, pick one each.

@@ -46,12 +46,14 @@ Never say: "AmCore is SOC 2 compliant/certified", any compliance certification (
 Never publish prices. Use: "One setup fee. One monthly fee. No per-user fees." Every pricing mention links to "Book a discovery call."
 
 ### Brand
-Colors as Tailwind v4 theme tokens: charcoal `#292929` (primary), brick red `#A6372F` (accent), cream `#F3ECDD` (background), near-black text `#191A1C`. Three colors only: black, red, cream. No navy, no bronze. Headings: Fraunces (serif). Body: IBM Plex Sans, minimum 16px. No gradients, emoji, or glassmorphism. Real trades imagery only (labeled placeholders until real photos exist) — no stock photos of people in suits at laptops.
+Colors as Tailwind v4 theme tokens: charcoal `#292929` (primary), brick red `#A6372F` (accent), cream `#F3ECDD` (background), near-black text `#191A1C`. Three colors only: black, red, cream. No navy, no bronze. Headings: Fraunces (serif). Body: IBM Plex Sans, minimum 16px. No gradients, emoji, or glassmorphism. Real trades imagery only in what ships — no stock photos of people in suits at laptops, no CGI/AI-generated imagery.
+
+**Stock drafts (local only):** `<x-photo>` resolves `public/images/stock-draft/{name}.(jpg|jpeg|webp|png)` as a second-choice source before falling back to the labeled placeholder — see `resources/views/components/photo.blade.php`. That folder is git-ignored and `StockPhotoSafetyTest` asserts stock drafts never render outside the local environment. Use it to drop in real (non-CGI) free-licensed photos — e.g. Wikimedia Commons — for layout/copy review, captioned "STOCK DRAFT · local only". Never use it for people presented as real AmCore staff (founder portraits) or for anything implying a real AmCore client result (e.g. `websites-example`) — those stay `[PLACEHOLDER]` until the real thing exists. Every stock draft gets swapped for real AmCore photography before production; track sources/licenses in `public/images/stock-draft/SOURCES.md` (also git-ignored).
 
 ## Where things are
 
 - Spec/overview/reference docs: `docs/spec.md`, `docs/overview.md`, `docs/reference.md`.
 - Project plan: `~/.claude/plans/` (this workspace tracks plans as a single markdown file per plan — there is no `plans.db` on this machine yet, despite the RhynoDesigns playbook describing one).
 - GitHub repo: pending — user confirmed private, under AmCore's own GitHub org, but the org/repo name is still a placeholder.
-- Domain: pending purchase at Namesilo — placeholder.
+- Domain: `amcoresystems.com`, registered at NameSilo (2026-09-25, expires 2027-09-25). Currently parked on NameSilo's default nameservers (`ns1`/`ns2.dnsowl.com`) — not yet pointed at any host. Don't touch DNS until there's a real deploy target; changing nameservers now would just break the parking page for nothing.
 - Laravel Cloud: deploy only when the user explicitly asks. Use AmCore's own Cloud account, hibernation OFF (public marketing site).

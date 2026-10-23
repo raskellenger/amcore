@@ -20,24 +20,23 @@ $trades = [
 @endphp
 
 <div class="mx-auto max-w-4xl px-6 py-24">
-    <span class="eyebrow mb-5">Trades we serve</span>
-    <h1 class="font-heading text-4xl font-medium text-cream">Built around how your trade runs jobs.</h1>
+    <h1 class="font-display text-4xl leading-tight text-cream sm:text-h1-cta">Built around how your trade runs jobs.</h1>
     <p class="mt-4 max-w-2xl text-lg text-slate">
-        Every trade has its own words and its own paperwork. We configure the system to yours. Not sure yours is listed? <a href="{{ route('contact') }}" wire:navigate class="font-medium text-signal hover:underline">Ask us.</a>
+        Every trade has its own words and its own paperwork. We configure the system to yours. Not sure yours is listed? <a href="{{ route('contact') }}" wire:navigate class="font-medium text-brick hover:underline">Ask us.</a>
     </p>
 
     <nav aria-label="Trades" class="mt-8 flex flex-wrap gap-2 text-sm font-medium">
         @foreach ($trades as $trade)
-            <a href="#{{ $trade['id'] }}" class="rounded border border-steel px-3 py-1.5 text-cream hover:border-brick hover:text-signal">{{ $trade['name'] }}</a>
+            <a href="#{{ $trade['id'] }}" class="rounded-full border border-steel px-3 py-1.5 text-cream hover:border-brick hover:text-brick">{{ $trade['name'] }}</a>
         @endforeach
     </nav>
 
     <div class="mt-12 space-y-6">
         @foreach ($trades as $trade)
-            <section id="{{ $trade['id'] }}" class="hover-card scroll-mt-20 overflow-hidden rounded border border-steel bg-graphite md:grid md:grid-cols-5">
+            <section id="{{ $trade['id'] }}" class="hover-card scroll-mt-20 overflow-hidden rounded-lg border border-steel bg-graphite shadow-card-dark md:grid md:grid-cols-5">
                 <x-photo :name="'trade-' . $trade['id']" ratio="3/2" :position="$trade['position'] ?? 'center'" :label="$trade['name'] . ' at work'" :alt="$trade['name'] . ' work in progress'" class="rounded-none border-0 md:col-span-2 md:aspect-auto" />
                 <div class="p-8 md:col-span-3">
-                <h2 class="font-heading text-2xl font-medium text-cream">{{ $trade['name'] }}</h2>
+                <h2 class="font-heading text-h4 text-cream">{{ $trade['name'] }}</h2>
                 <p class="mt-3 text-cream/80"><span class="font-semibold text-cream">The problem:</span> {{ $trade['pain'] }}</p>
                 <p class="mt-2 text-cream/80"><span class="font-semibold text-cream">What changes:</span> {{ $trade['fix'] }}</p>
                 </div>
@@ -47,7 +46,7 @@ $trades = [
 
     <div class="mt-14 text-center">
         <a href="{{ route('contact') }}" wire:navigate
-            class="inline-flex items-center rounded bg-brick px-6 py-3 text-sm font-medium text-cream transition hover:bg-brick/90 btn-arrow">
+            class="inline-flex h-14 items-center justify-center rounded-full bg-brick px-6 text-sm font-semibold text-cream transition hover:bg-brick/90 btn-arrow">
             Book a Discovery Call
         </a>
     </div>

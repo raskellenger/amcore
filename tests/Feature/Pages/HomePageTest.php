@@ -6,26 +6,25 @@ test('the home page shows the hero, pain points, pillars, and modules', function
     $response = $this->get('/');
 
     $response->assertOk();
-    $response->assertSee('Operating systems for the trades.');
+    $response->assertSee('Paperwork is out.');
+    $response->assertSee('Your system is in.');
     $response->assertSee('Book a Discovery Call');
     $response->assertSee('Hours lost re-typing the same work order three times.');
-    $response->assertSee('Built for the people doing the work.');
-    $response->assertSee('Work Orders');
-    $response->assertSee('Notifications & Messaging');
+    $response->assertSee('Built around your shop.');
+    $response->assertSee('Get the work');
+    $response->assertSee('Know your numbers');
     $response->assertDontSee('weeks from kickoff');
     $response->assertDontSee('Build (about 2 weeks)');
     $response->assertSee('Built by people from the trades');
     $response->assertSee('See Websites');
 });
 
-test('the home hero is the workflow map, not a stock photo, and names the Upstate', function (): void {
+test('the home hero is a video backdrop, not a stock photo', function (): void {
     $response = $this->get('/');
 
-    $response->assertSee('Upstate, South Carolina');
-    $response->assertSee('New Customer or New Lead');
-    $response->assertSee('Final Invoice Paid, 5-Star Review Completed');
-    $response->assertSee("I'm on a pile of apps", false);
-    $response->assertSee("I'm on paper", false);
+    $response->assertSee('videos/hero.mp4', false);
+    $response->assertDontSee('New Customer or New Lead');
+    $response->assertDontSee("I'm on a pile of apps", false);
     $response->assertDontSee('Greenville, SC · Built for the trades');
     $response->assertDontSee('home-hero');
     $response->assertDontSee('Napkin estimate');
@@ -40,7 +39,7 @@ test('the problem section covers hopping between systems and shared passwords', 
 
 test('the home page explains the operating system is an all-in-one', function (): void {
     $this->get('/')
-        ->assertSee('Not an ERP. Not a CRM. Not a project-management tool.')
+        ->assertSee('Your books stay in QuickBooks.')
         ->assertDontSee('We run it for you.');
 });
 

@@ -31,7 +31,7 @@ Defined in `resources/css/app.css` (`@theme` block) and mirrored in `CLAUDE.md`.
 | Approved uptime % and critical response time | Operating Systems, FAQ | Claims rules forbid any number until approved. |
 | Contact-form response-time commitment | Contact page success message | e.g. "within 1 business day" — needs a real number. |
 | Phone number / email for click-to-call | Contact page | Not yet provided. |
-| Domain name | Site-wide (canonical URLs, SES identity, structured data) | To be registered at Namesilo. |
+| Domain name | Site-wide (canonical URLs, SES identity, structured data) | `amcoresystems.com`, registered at NameSilo — currently parked, not yet pointed at a host. |
 | GitHub org/repo name | Infra | User confirmed: private repo, AmCore's own org, name TBD. |
 | Favicon / OG image | Done (`public/images/brand/`) | Cropped from the real logo via `sips` (no vector source yet) — usable but not pixel-perfect. Revisit once the Logo Segments zip is accessible. |
 | Hero / section photography | Home, About, Operating Systems, How We Work | Generator prompts delivered to user in chat; peopleless/faceless-enough by design. Real photos preferred when available. |

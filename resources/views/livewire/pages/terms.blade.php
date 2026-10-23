@@ -10,12 +10,11 @@ view()->share('description', 'AmCore Systems terms of use (draft).');
 ?>
 
 <div class="mx-auto max-w-2xl px-6 py-24">
-    <div class="rounded border border-dashed border-brick bg-graphite px-4 py-2 text-center text-sm font-medium text-signal">
+    <div class="rounded-lg border border-dashed border-brick bg-graphite px-4 py-2 text-center text-sm font-medium text-signal">
         DRAFT — attorney review required
     </div>
 
-    <span class="eyebrow mb-5">Terms</span>
-    <h1 class="mt-8 font-heading text-4xl font-medium text-cream">Terms of Use</h1>
+    <h1 class="mt-8 font-display text-4xl leading-tight text-cream sm:text-h1-cta">Terms of Use</h1>
 
     <div class="mt-8 space-y-8 text-cream/80">
         <div>

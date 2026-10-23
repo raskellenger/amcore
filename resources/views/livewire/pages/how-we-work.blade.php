@@ -14,8 +14,7 @@ view()->share('description', "How AmCore works with you: discovery at your shop,
 @endphp
 
 <div class="mx-auto max-w-3xl px-6 py-24">
-    <span class="eyebrow mb-5">How we work</span>
-    <h1 class="font-heading text-4xl font-medium text-cream">How We Work</h1>
+    <h1 class="font-display text-4xl leading-tight text-cream sm:text-h1-cta">How We Work</h1>
     <p class="mt-4 text-lg text-slate">In person, at your shop, with the people who do the work.</p>
 
     <div class="mt-10 grid gap-4 sm:grid-cols-3">
@@ -25,7 +24,7 @@ view()->share('description', "How AmCore works with you: discovery at your shop,
     </div>
 
 
-    <h2 class="mt-14 font-heading text-xl font-medium text-cream">The stages</h2>
+    <h2 class="mt-14 font-heading text-h4 text-cream">The stages</h2>
     <p class="mt-3 text-cream/80">No fixed dates. We move at the pace of your jobs, and we give you a real timeline on the discovery call.</p>
     <ol class="mt-6 space-y-4">
         @foreach ([
@@ -37,7 +36,7 @@ view()->share('description', "How AmCore works with you: discovery at your shop,
             ['In-person training, then rollout', 'We train your people at your shop and turn it on for everyone.'],
             ['Ongoing support', 'A real person you can call. Updates and security stay with us.'],
         ] as $i => [$stage, $detail])
-            <li class="hover-card rounded border border-steel bg-graphite p-4">
+            <li class="hover-card rounded-lg border border-steel bg-graphite p-4 shadow-card-dark">
                 <p class="mono text-xs text-signal">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</p>
                 <h3 class="mt-1 font-heading font-medium text-cream">{{ $stage }}</h3>
                 <p class="mt-1 text-cream/80">{{ $detail }}</p>
@@ -45,13 +44,13 @@ view()->share('description', "How AmCore works with you: discovery at your shop,
         @endforeach
     </ol>
 
-    <h2 class="mt-14 font-heading text-xl font-medium text-cream">What we need from you</h2>
+    <h2 class="mt-14 font-heading text-h4 text-cream">What we need from you</h2>
     <p class="mt-3 text-cream/80">
         Time with the people who actually do the work, office and field. Copies of the paperwork you use today: work orders, estimates, invoices. And a few crews willing to run it on real jobs before the full rollout.
     </p>
 
     <div class="mt-14">
-        <a href="{{ route('contact') }}" wire:navigate class="inline-flex items-center rounded bg-brick px-6 py-3 text-sm font-medium text-cream transition hover:bg-brick/90 btn-arrow">
+        <a href="{{ route('contact') }}" wire:navigate class="inline-flex h-14 items-center justify-center rounded-full bg-brick px-6 text-sm font-semibold text-cream transition hover:bg-brick/90 btn-arrow">
             Book a Discovery Call
         </a>
     </div>

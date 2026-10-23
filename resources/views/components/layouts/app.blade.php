@@ -53,90 +53,96 @@
         Skip to content
     </a>
 
-    <header x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false" class="sticky top-0 z-50 border-b border-ink/10 bg-cream text-ink">
-        <div class="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6 py-4">
-            <a href="{{ route('home') }}" class="flex items-center gap-2" wire:navigate>
-                <img src="{{ asset('images/brand/amcore-mark.png') }}" alt="" class="h-9 w-auto">
-                <img src="{{ asset('images/brand/amcore-wordmark.png') }}" alt="AmCore Systems" class="h-5 w-auto">
-            </a>
-
-            <nav class="hidden items-center gap-8 text-sm font-medium lg:flex">
-                <a href="{{ route('operating-systems') }}" class="link-draw hover:text-brick" wire:navigate>Operating Systems</a>
-                <a href="{{ route('trades') }}" class="link-draw hover:text-brick" wire:navigate>Trades</a>
-                <a href="{{ route('websites') }}" class="link-draw hover:text-brick" wire:navigate>Websites</a>
-                <a href="{{ route('how-we-work') }}" class="link-draw hover:text-brick" wire:navigate>How We Work</a>
-                <a href="{{ route('about') }}" class="link-draw hover:text-brick" wire:navigate>About</a>
-                <a href="{{ route('faq') }}" class="link-draw hover:text-brick" wire:navigate>FAQ</a>
-            </nav>
-
-            <div class="flex items-center gap-3">
-                <a href="{{ route('contact') }}" wire:navigate
-                    class="hidden shrink-0 items-center rounded bg-brick btn-arrow px-4 py-2 text-sm font-medium text-cream transition hover:bg-brick/90 sm:inline-flex">
-                    Book a Discovery Call
+    <header x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false" class="sticky top-0 z-50">
+        <div class="mx-auto max-w-[1200px] px-6 pt-6">
+            <div class="flex items-center justify-between gap-6 rounded-full bg-white px-6 py-3 text-ink shadow-card">
+                <a href="{{ route('home') }}" class="flex items-center gap-2" wire:navigate>
+                    <img src="{{ asset('images/brand/amcore-mark.png') }}" alt="" class="h-9 w-auto">
+                    <img src="{{ asset('images/brand/amcore-wordmark.png') }}" alt="AmCore Systems" class="h-5 w-auto">
                 </a>
 
-                <button type="button" @click="mobileMenuOpen = !mobileMenuOpen" aria-controls="mobile-menu"
-                    :aria-expanded="mobileMenuOpen" aria-label="Toggle menu" class="rounded p-2 text-ink hover:bg-ink/5 lg:hidden">
-                    <flux:icon name="bars-3" x-show="!mobileMenuOpen" class="size-6" aria-hidden="true" />
-                    <flux:icon name="x-mark" x-show="mobileMenuOpen" x-cloak class="size-6" aria-hidden="true" />
-                </button>
-            </div>
-        </div>
+                <nav class="hidden items-center gap-6 text-nav font-medium lg:flex">
+                    <a href="{{ route('operating-systems') }}" class="link-draw hover:text-brick" wire:navigate>Operating Systems</a>
+                    <a href="{{ route('trades') }}" class="link-draw hover:text-brick" wire:navigate>Trades</a>
+                    <a href="{{ route('websites') }}" class="link-draw hover:text-brick" wire:navigate>Websites</a>
+                    <a href="{{ route('how-we-work') }}" class="link-draw hover:text-brick" wire:navigate>How We Work</a>
+                    <a href="{{ route('about') }}" class="link-draw hover:text-brick" wire:navigate>About</a>
+                    <a href="{{ route('faq') }}" class="link-draw hover:text-brick" wire:navigate>FAQ</a>
+                </nav>
 
-        <nav id="mobile-menu" x-show="mobileMenuOpen" x-cloak @click.outside="mobileMenuOpen = false"
-            class="absolute inset-x-0 top-full z-40 flex flex-col gap-1 border-b border-ink/10 bg-cream px-6 py-4 text-sm font-medium text-ink lg:hidden">
-            <a href="{{ route('operating-systems') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>Operating Systems</a>
-            <a href="{{ route('trades') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>Trades</a>
-            <a href="{{ route('websites') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>Websites</a>
-            <a href="{{ route('how-we-work') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>How We Work</a>
-            <a href="{{ route('about') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>About</a>
-            <a href="{{ route('faq') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>FAQ</a>
-            <a href="{{ route('contact') }}" @click="mobileMenuOpen = false" wire:navigate
-                class="mt-2 inline-flex items-center justify-center rounded bg-brick px-4 py-2 font-medium text-cream sm:hidden">
-                Book a Discovery Call
-            </a>
-        </nav>
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('contact') }}" wire:navigate
+                        class="hidden h-14 shrink-0 items-center justify-center rounded-full bg-brick btn-arrow px-6 text-sm font-semibold text-cream transition hover:bg-brick/90 sm:inline-flex">
+                        Book a Discovery Call
+                    </a>
+
+                    <button type="button" @click="mobileMenuOpen = !mobileMenuOpen" aria-controls="mobile-menu"
+                        :aria-expanded="mobileMenuOpen" aria-label="Toggle menu" class="rounded p-2 text-ink hover:bg-ink/5 lg:hidden">
+                        <flux:icon name="bars-3" x-show="!mobileMenuOpen" class="size-6" aria-hidden="true" />
+                        <flux:icon name="x-mark" x-show="mobileMenuOpen" x-cloak class="size-6" aria-hidden="true" />
+                    </button>
+                </div>
+            </div>
+
+            <nav id="mobile-menu" x-show="mobileMenuOpen" x-cloak @click.outside="mobileMenuOpen = false"
+                class="mt-2 flex flex-col gap-1 rounded-2xl bg-white px-6 py-4 text-sm font-medium text-ink shadow-card lg:hidden">
+                <a href="{{ route('operating-systems') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>Operating Systems</a>
+                <a href="{{ route('trades') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>Trades</a>
+                <a href="{{ route('websites') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>Websites</a>
+                <a href="{{ route('how-we-work') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>How We Work</a>
+                <a href="{{ route('about') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>About</a>
+                <a href="{{ route('faq') }}" @click="mobileMenuOpen = false" class="rounded px-2 py-2 hover:bg-ink/5 hover:text-brick" wire:navigate>FAQ</a>
+                <a href="{{ route('contact') }}" @click="mobileMenuOpen = false" wire:navigate
+                    class="mt-2 inline-flex h-14 items-center justify-center rounded-full bg-brick px-6 font-semibold text-cream sm:hidden">
+                    Book a Discovery Call
+                </a>
+            </nav>
+        </div>
     </header>
 
     <main id="main">
         {{ $slot }}
     </main>
 
-    <footer class="mt-24 border-t border-steel bg-graphite text-cream">
+    <footer class="mt-24 border-t border-steel bg-cream text-ink">
         <div class="mx-auto grid max-w-[1200px] gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
             <div class="lg:col-span-2">
                 <span class="flex items-center gap-2">
-                    <img src="{{ asset('images/brand/amcore-mark.png') }}" alt="" class="h-9 w-auto brightness-0 invert">
-                    <img src="{{ asset('images/brand/amcore-wordmark.png') }}" alt="AmCore Systems" class="h-5 w-auto brightness-0 invert">
+                    <img src="{{ asset('images/brand/amcore-mark.png') }}" alt="" class="h-9 w-auto">
+                    <img src="{{ asset('images/brand/amcore-wordmark.png') }}" alt="AmCore Systems" class="h-5 w-auto">
                 </span>
-                <p class="mt-4 max-w-sm text-sm text-slate">
+                <p class="mt-4 max-w-sm text-sm text-muted">
                     Operating systems for the trades. Built by tradesmen, run for you. Serving Greenville and the Upstate.
                 </p>
+                <p class="mt-4 max-w-sm text-sm text-muted">
+                    We also build fast, mobile-first websites for trades businesses.
+                </p>
+                <a href="{{ route('websites') }}" wire:navigate class="mt-2 inline-block text-sm font-medium text-brick hover:underline">See Websites &rarr;</a>
             </div>
 
             <div>
-                <h2 class="mono text-xs uppercase text-slate">Company</h2>
-                <ul class="mt-4 space-y-2 text-sm text-cream/80">
-                    <li><a href="{{ route('operating-systems') }}" class="link-draw hover:text-signal" wire:navigate>Operating Systems</a></li>
-                    <li><a href="{{ route('trades') }}" class="link-draw hover:text-signal" wire:navigate>Trades</a></li>
-                    <li><a href="{{ route('websites') }}" class="link-draw hover:text-signal" wire:navigate>Websites</a></li>
-                    <li><a href="{{ route('how-we-work') }}" class="link-draw hover:text-signal" wire:navigate>How We Work</a></li>
-                    <li><a href="{{ route('about') }}" class="link-draw hover:text-signal" wire:navigate>About</a></li>
-                    <li><a href="{{ route('faq') }}" class="link-draw hover:text-signal" wire:navigate>FAQ</a></li>
+                <h2 class="mono text-xs uppercase text-muted">Company</h2>
+                <ul class="mt-4 space-y-2 text-sm text-ink/80">
+                    <li><a href="{{ route('operating-systems') }}" class="link-draw hover:text-brick" wire:navigate>Operating Systems</a></li>
+                    <li><a href="{{ route('trades') }}" class="link-draw hover:text-brick" wire:navigate>Trades</a></li>
+                    <li><a href="{{ route('websites') }}" class="link-draw hover:text-brick" wire:navigate>Websites</a></li>
+                    <li><a href="{{ route('how-we-work') }}" class="link-draw hover:text-brick" wire:navigate>How We Work</a></li>
+                    <li><a href="{{ route('about') }}" class="link-draw hover:text-brick" wire:navigate>About</a></li>
+                    <li><a href="{{ route('faq') }}" class="link-draw hover:text-brick" wire:navigate>FAQ</a></li>
                 </ul>
             </div>
 
             <div>
-                <h2 class="mono text-xs uppercase text-slate">Legal</h2>
-                <ul class="mt-4 space-y-2 text-sm text-cream/80">
-                    <li><a href="{{ route('privacy') }}" class="link-draw hover:text-signal" wire:navigate>Privacy Policy</a></li>
-                    <li><a href="{{ route('terms') }}" class="link-draw hover:text-signal" wire:navigate>Terms of Use</a></li>
-                    <li><a href="{{ route('contact') }}" class="link-draw hover:text-signal" wire:navigate>Contact</a></li>
+                <h2 class="mono text-xs uppercase text-muted">Legal</h2>
+                <ul class="mt-4 space-y-2 text-sm text-ink/80">
+                    <li><a href="{{ route('privacy') }}" class="link-draw hover:text-brick" wire:navigate>Privacy Policy</a></li>
+                    <li><a href="{{ route('terms') }}" class="link-draw hover:text-brick" wire:navigate>Terms of Use</a></li>
+                    <li><a href="{{ route('contact') }}" class="link-draw hover:text-brick" wire:navigate>Contact</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="border-t border-steel py-6 text-center text-xs text-slate">
+        <div class="border-t border-divider py-6 text-center text-xs text-muted">
             &copy; {{ now()->year }} AmCore Systems LLC. Greenville, SC.
         </div>
     </footer>
@@ -145,9 +151,9 @@
     @unless (request()->routeIs('whiteboard'))
     <div class="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-steel bg-carbon p-2 sm:hidden">
         @if (config('amcore.phone'))
-            <a href="tel:{{ config('amcore.phone') }}" class="inline-flex flex-1 items-center justify-center rounded border border-steel bg-graphite px-4 py-3 text-sm font-medium text-cream">Call</a>
+            <a href="tel:{{ config('amcore.phone') }}" class="inline-flex flex-1 items-center justify-center rounded-full border border-steel bg-graphite px-4 py-3 text-sm font-medium text-cream">Call</a>
         @endif
-        <a href="{{ route('contact') }}" wire:navigate class="inline-flex flex-[2] items-center justify-center rounded bg-brick px-4 py-3 text-sm font-medium text-cream">Book a Discovery Call</a>
+        <a href="{{ route('contact') }}" wire:navigate class="inline-flex flex-[2] items-center justify-center rounded-full bg-brick px-4 py-3 text-sm font-semibold text-cream">Book a Discovery Call</a>
     </div>
     @endunless
 

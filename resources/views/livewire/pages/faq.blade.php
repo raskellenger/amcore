@@ -28,8 +28,7 @@ $faqs = [
 @endphp
 
 <div class="mx-auto max-w-3xl px-6 py-24">
-    <span class="eyebrow mb-5">FAQ</span>
-    <h1 class="font-heading text-4xl font-medium text-cream">FAQ</h1>
+    <h1 class="font-display text-4xl leading-tight text-cream sm:text-h1-cta">FAQ</h1>
 
     <dl class="mt-10 divide-y divide-steel">
         @foreach ($faqs as [$question, $answer])

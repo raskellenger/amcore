@@ -7,40 +7,77 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
-    --font-heading: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Libre Baskerville', ui-serif, serif;
     --font-mono: 'Space Mono', ui-monospace, monospace;
 
-    /* Black, red, cream. Dark-first, line-based structure (no shadows, no gradients). */
-    --color-carbon: #0d0d0d;
-    --color-graphite: #171615;
-    --color-steel: #35322f;
-    --color-slate: #9a948d;
-    --color-cream: #f3ecdd;
-    --color-brick: #a6372f;
-    --color-signal: #e4473d;
-    --color-ink: #191a1c;
+    /*
+     * AmCore brand v2 — charcoal / brick / cream. Wired from the Figma homepage design-token
+     * extraction (see ~/.claude plans + scratchpad/figma-extraction/tokens.css for the source audit).
+     * Old names kept where the ROLE matches closely enough to reuse every existing callsite;
+     * `--color-signal` is retired as a second accent and aliased to brick, since the source design
+     * has only one accent color.
+     */
+    --color-carbon: #1a1814;              /* dark section background (was #0d0d0d) */
+    --color-graphite: #2a2520;            /* dark card surface, one step lighter than carbon (was #171615) */
+    --color-steel: rgb(255 255 255 / 8%); /* border on dark cards/dividers (was opaque #35322f) */
+    --color-slate: #d9d1c5;               /* muted text on DARK backgrounds (was #9a948d) */
+    --color-cream: #f5f1e8;               /* light section background + light text on dark (was #f3ecdd) */
+    --color-brick: #a6372f;               /* accent — unchanged, exact match in source design */
+    --color-signal: #a6372f;              /* retired second accent, aliased to brick (was #e4473d) */
+    --color-ink: #282722;                 /* dark text on LIGHT backgrounds (was #191a1c) */
+
+    /* New roles that didn't exist before — the old theme had no light sections. */
+    --color-white: #ffffff;    /* nav bg + white cards — distinct from cream, never substitute one for the other */
+    --color-icon-chip: #f6e9e4; /* feature icon chip background */
+    --color-muted: #706b62;    /* muted text on LIGHT backgrounds */
+    --color-divider: #d9d1c5;  /* divider/rule color on light sections (same hex as --color-slate, distinct role) */
+    --color-tile-dark: #3a2f2a; /* nested dark tile inside an accented dark card (e.g. the connected-feature row) */
 
     --radius-sm: 4px;
+    --radius-md: 12px; /* icon chips */
+    --radius-lg: 24px; /* standard cards */
+    --radius-xl: 32px; /* large cards, photos */
+
+    --shadow-card: 0px 8px 28px rgb(40 39 34 / 4%);              /* light cards + nav */
+    --shadow-card-dark: 0px 10px 28px rgb(0 0 0 / 25%);          /* dark cards */
+    --shadow-card-dark-accent: 0px 12px 40px rgb(0 0 0 / 25%);   /* accented dark card ("With AmCore") */
+
+    /* Custom type sizes with no clean native Tailwind equivalent. Everything else (12/14/16/18px)
+       reuses Tailwind's native text-xs/sm/base/lg. */
+    --text-h1-hero: 62px;
+    --text-h1-hero--line-height: 1.22;
+    --text-h1-cta: 48px;
+    --text-h1-cta--line-height: 1.22;
+    --text-h2: 42px;
+    --text-h2--line-height: 1.16;
+    --text-h3: 34px;
+    --text-h3--line-height: 1.16;
+    --text-h4: 24px;
+    --text-h4--line-height: normal;
+    --text-nav: 13px;
+    --text-nav--line-height: normal;
+    --text-micro: 11px;
+    --text-micro--line-height: normal;
 }
 
 body {
     background-color: var(--color-carbon);
     color: var(--color-cream);
-    letter-spacing: -0.02em;
 }
 
-/* Instrument-style section label: mono, outlined, never filled. */
-.eyebrow {
-    display: inline-block;
-    border: 1px solid var(--color-slate);
-    border-radius: 4px;
-    padding: 6px 12px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 1.5;
-    letter-spacing: 0;
-    color: var(--color-slate);
+/* Hero video backdrop overlay — exact two-layer stack (flat + gradient) from the Figma extraction. */
+.hero-overlay-flat {
+    background-color: rgb(0 0 0 / 42%);
+}
+.hero-overlay-gradient {
+    background-image: linear-gradient(
+        152.18deg,
+        rgb(0 0 0 / 40%) 25%,
+        rgb(0 0 0 / 10.2%) 47.5%,
+        rgb(0 0 0 / 60%) 75%
+    );
 }
 
 .mono {
@@ -54,33 +91,15 @@ body {
 
 /* ---- Interaction cues -------------------------------------------------- */
 
-/* Cards: a red line sweeps across the top edge, the border lifts, the card rises 2px. */
+/* Cards: the whole border highlights red on hover, the card rises 2px. */
 .hover-card {
     position: relative;
     transition: border-color 0.25s ease, transform 0.25s ease;
 }
-.hover-card::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    height: 2px;
-    background: var(--color-brick);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
-    pointer-events: none;
-    z-index: 1;
-}
 .hover-card:hover,
 .hover-card:focus-within {
-    border-color: color-mix(in srgb, var(--color-cream) 30%, transparent);
+    border-color: var(--color-brick);
     transform: translateY(-2px);
-}
-.hover-card:hover::before,
-.hover-card:focus-within::before {
-    transform: scaleX(1);
 }
 .hover-card img {
     transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -89,17 +108,26 @@ body {
     transform: scale(1.04);
 }
 
-/* Icons sit in an outlined square that fills red, with a small tilt, when the card is hovered. */
+/* Icons sit in a tinted square (size set per-instance via a Tailwind size-* utility) that fills
+   red, with a small tilt, when the card is hovered. */
 .icon-chip {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-icon-chip);
+    color: var(--color-brick);
+    border-radius: var(--radius-md);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+.icon-chip.size-10 {
     width: 40px;
     height: 40px;
-    border: 1px solid var(--color-steel);
-    border-radius: 4px;
-    color: var(--color-signal);
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.icon-chip.size-14 {
+    width: 56px;
+    height: 56px;
 }
 .icon-chip svg {
     transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -107,7 +135,6 @@ body {
 .hover-card:hover .icon-chip,
 .hover-card:focus-within .icon-chip {
     background-color: var(--color-brick);
-    border-color: var(--color-brick);
     color: var(--color-cream);
 }
 .hover-card:hover .icon-chip svg,

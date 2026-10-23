@@ -10,15 +10,14 @@ view()->share('description', 'Fast, mobile-first websites for trades businesses,
 ?>
 
 <div class="mx-auto max-w-3xl px-6 py-24">
-    <span class="eyebrow mb-5">Websites</span>
-    <h1 class="font-heading text-4xl font-medium text-cream">Fast, mobile-first websites built to get the phone to ring.</h1>
+    <h1 class="font-display text-4xl leading-tight text-cream sm:text-h1-cta">Fast, mobile-first websites built to get the phone to ring.</h1>
     <p class="mt-4 text-lg text-slate">
         Not to win design awards. If your current site was built ten years ago (or never really built at all), this is the fix.
     </p>
 
     <x-photo name="websites-example" ratio="4/3" label="A finished local trades site, truck, or sign" class="mt-10" />
 
-    <h2 class="mt-14 font-heading text-xl font-medium text-cream">How it works</h2>
+    <h2 class="mt-14 font-heading text-h4 text-cream">How it works</h2>
     <ol class="mt-6 space-y-4">
         @foreach ([
             'Quick call about your business and what a customer needs to see',
@@ -33,7 +32,7 @@ view()->share('description', 'Fast, mobile-first websites for trades businesses,
     </ol>
 
     <div class="mt-14">
-        <a href="{{ route('contact') }}" wire:navigate class="inline-flex items-center rounded bg-brick px-6 py-3 text-sm font-medium text-cream transition hover:bg-brick/90 btn-arrow">
+        <a href="{{ route('contact') }}" wire:navigate class="inline-flex h-14 items-center justify-center rounded-full bg-brick px-6 text-sm font-semibold text-cream transition hover:bg-brick/90 btn-arrow">
             Request a Quote
         </a>
     </div>
